@@ -16,7 +16,7 @@
     <div class="p-6 border-b border-gray-300">
         <h2 class="text-2xl font-bold flex items-center text-[#BA9D79]">
             <i class="fas fa-estate mr-3 text-black"></i>
-            Real Estate Pro
+            Panel ENCASA
         </h2>
     </div>
 

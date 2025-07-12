@@ -4,9 +4,16 @@
  <div class="container mx-auto px-4 py-8">
   <h2 class="text-3xl font-bold mb-8 text-gray-900 tracking-tight">Mis Propiedades</h2>
 
+
+     @if (session('success'))
+            <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4">
+                {{ session('success') }}
+            </div>
+        @endif
+
   <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
     @foreach ($propiedades as $propiedad)
-      <a href="#" class="group block bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition duration-300 border border-gray-100">
+      <a href="{{route('agente.editar.propiedad',$propiedad->id)}}" class="group block bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition duration-300 border border-gray-100">
 
         <div class="relative group rounded-2xl shadow-lg border border-gray-200 overflow-hidden transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 bg-white">
   <!-- Imagen -->
@@ -43,11 +50,16 @@
       </svg>
     </button>
     <!-- Eliminar -->
-    <button onclick="eliminarPropiedad()" class="bg-red-500 hover:bg-red-600 text-white p-2 rounded-full shadow-md transition">
+ <form action="{{route('agente.editar.propiedad.destroy', $propiedad->id)}}" method="POST" onsubmit="return confirm('¿Estás seguro de que deseas eliminar esta propiedad?');" class="inline">
+    @csrf
+    @method('DELETE')
+    <button type="submit" class="bg-red-500 hover:bg-red-600 text-white p-2 rounded-full shadow-md transition">
       <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
       </svg>
     </button>
+</form>
+
   </div>
 </div>
       </a>
@@ -57,7 +69,6 @@
 
 <script>
   function editarPropiedad() {
-    alert('Ir a página de edición...');
   }
 
   function eliminarPropiedad() {

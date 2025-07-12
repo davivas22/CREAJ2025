@@ -57,5 +57,8 @@ class User extends Authenticatable implements MustVerifyEmail
     public function propiedad(){
         return $this->hasMany(Propertie::class);
     }
+    public function agente(){
+        return $this->hasOne(Agente::class);
+    }
     
 }

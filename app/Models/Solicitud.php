@@ -16,6 +16,7 @@ class Solicitud extends Model
     'zona',
     'mensaje',
     'photo',
+    'razon',
 ];
 
 public function user (){

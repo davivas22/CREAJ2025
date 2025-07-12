@@ -1,7 +1,7 @@
 @extends('layout.sidebaradmin')
 
 @section('content')
-
+ 
 <div class="container mx-auto px-4 py-6">
     <h1 class="text-3xl font-bold mb-8">Solicitudes Recibidas</h1>
      @if (session('success'))
@@ -16,9 +16,7 @@
       <!-- Encabezado -->
       <div class="flex items-center p-5">
         <div class="w-14 h-14 bg-blue-50 rounded-full flex items-center justify-center">
-          <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M18 19a6 6 0 10-12 0M12 11a4 4 0 100-8 4 4 0 000 8z" />
-          </svg>
+          <img src="{{asset($solicitudes->user->foto_perfil)}}" alt="">
         </div>
         <div class="ml-4">
           <h3 class="text-lg font-bold text-gray-800">{{ $solicitudes->name }}</h3>

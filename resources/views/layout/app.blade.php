@@ -130,9 +130,9 @@
                       <!-- Avatar y Menú -->
                 <div class="relative inline-block text-left" id="user-menu">
                     <!-- Botón del avatar -->
-                    <button onclick="toggleMenu()" class="flex items-center justify-center w-10 h-10 rounded-full bg-[#BA9D79] text-white font-bold focus:outline-none">
-                        <!-- Iniciales o ícono de usuario -->
-                        <span>P</span> {{-- Puedes usar la inicial del nombre --}}
+                   <button onclick="toggleMenu()" class="flex items-center justify-center w-10 h-10 rounded-full bg-black text-white font-bold focus:outline-none overflow-hidden">
+                        <img src="{{ asset(auth()->user()->foto_perfil) }}" alt="Foto perfil"
+                            class="w-full h-full object-cover rounded-full">
                     </button>
 
                     <!-- Menú desplegable -->
@@ -174,6 +174,7 @@
      {{-- CONTENIDO DE CADA PÁGINA --}}
     <main class=" pt-10">
         @yield('content')
+        
     </main>
 
 

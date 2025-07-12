@@ -1,154 +1,132 @@
 @extends('layout.sidebaradmin')
 
 @section('content')
-
-<!-- Contenido Principal -->
-        <main class="flex-1 overflow-y-auto bg-gray-50">
-            <!-- Barra superior -->
-            <header class="bg-white border-b border-gray-200">
-                <div class="px-4 sm:px-6 lg:px-8 py-4">
-                    <div class="flex items-center justify-between">
-                        <div class="flex items-center">
-                            <button @click="mobileMenu = !mobileMenu" 
-                                    class="md:hidden text-gray-600 hover:text-gray-900 focus:outline-none">
-                                <i class="fas fa-bars text-xl"></i>
-                            </button>
-                            <div class="ml-4 md:ml-0">
-                                <h1 class="text-2xl font-bold text-gray-900">Agentes</h1>
-                                <p class="text-sm text-gray-500">Gestión de agentes inmobiliarios</p>
-                            </div>
-                        </div>
-
-                        <div class="flex items-center space-x-4">
-                            <div class="relative">
-                                <span class="absolute inset-y-0 left-0 pl-3 flex items-center">
-                                    <i class="fas fa-search text-gray-400"></i>
-                                </span>
-                                <input type="text" 
-                                       placeholder="Buscar agente..." 
-                                       class="w-64 pl-10 pr-4 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:border-blue-500">
-                            </div>
-                            <a  
-                            href="{{route('admin.solicitud.agente')}}"  
-                            class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 flex items-center">
-                            <i class="fas fa-plus mr-2"></i>
-                            Solicitud agentes
-                        </a>
-
-                        </div>
-                    </div>
-                </div>
-            </header>
-
-            <!-- Contenido de Agentes -->
-            <div class="p-6">
-                <!-- Lista de Agentes -->
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                    <template x-for="agent in agents" :key="agent.id">
-                        <div class="bg-white rounded-lg shadow-sm card-hover fade-enter">
-                            <div class="p-4">
-                                <div class="flex justify-between items-start mb-4">
-                                    <div>
-                                        <h3 class="text-lg font-semibold text-gray-800" x-text="agent.name"></h3>
-                                        <p class="text-sm text-gray-500" x-text="agent.role"></p>
-                                    </div>
-                                    <span class="px-2 py-1 text-xs font-medium rounded-full"
-                                          :class="agent.status === 'Activo' ? 'bg-green-100 text-green-700' : 'bg-yellow-100 text-yellow-700'"
-                                          x-text="agent.status"></span>
-                                </div>
-                                
-                                <div class="flex items-center justify-between mb-4">
-                                    <div class="flex items-center">
-                                        <i class="fas fa-home text-gray-400 mr-2"></i>
-                                        <span class="text-sm text-gray-600" x-text="agent.properties + ' Prop.'"></span>
-                                    </div>
-                                    <div class="flex items-center">
-                                        <i class="fas fa-star text-yellow-400 mr-1"></i>
-                                        <span class="text-sm text-gray-600" x-text="agent.rating"></span>
-                                    </div>
-                                </div>
-
-                                <div class="flex items-center space-x-2">
-                                    <button @click="editAgent(agent)" 
-                                            class="flex-1 px-3 py-2 text-sm text-blue-500 border border-blue-500 rounded-lg hover:bg-blue-50 transition-colors">
-                                        Editar
-                                    </button>
-                                    <button @click="selectedAgent = agent; deleteModal = true" 
-                                            class="px-3 py-2 text-sm text-red-500 border border-red-500 rounded-lg hover:bg-red-50 transition-colors">
-                                        <i class="fas fa-trash-alt"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </template>
-                </div>
-            </div>
-        </main>
+<!-- Encabezado -->
+<div class="container mx-auto px-4 py-8">
+  <div class="flex flex-col md:flex-row justify-between items-center mb-8 gap-4">
+    <div>
+      <h1 class="text-3xl font-extrabold text-black flex items-center gap-2">
+        Gestión de Agentes
+      </h1>
+      <p class="text-sm text-gray-500 mt-1">Administra solicitudes y controla perfiles de agentes registrados.</p>
     </div>
 
-    <!-- Modal Editar/Nuevo Agente -->
-    <div x-show="showModal" 
-         class="fixed inset-0 z-50 overflow-y-auto" 
-         style="display: none;">
-        <div class="flex items-center justify-center min-h-screen px-4">
-            <div class="fixed inset-0 bg-black opacity-30" @click="showModal = false"></div>
-            <div class="relative bg-white rounded-lg w-full max-w-md p-6 fade-enter">
-                <h3 class="text-lg font-semibold text-gray-800 mb-4" x-text="selectedAgent.id ? 'Editar Agente' : 'Nuevo Agente'"></h3>
-                <form @submit.prevent="saveAgent()">
-                    <div class="space-y-4">
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-1">Nombre</label>
-                            <input type="text" x-model="selectedAgent.name" class="w-full px-3 py-2 border border-gray-200 rounded-lg focus:outline-none focus:border-blue-500">
-                        </div>
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-1">Especialidad</label>
-                            <select x-model="selectedAgent.role" class="w-full px-3 py-2 border border-gray-200 rounded-lg focus:outline-none focus:border-blue-500">
-                                <option>Residencial</option>
-                                <option>Comercial</option>
-                                <option>Lujo</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-1">Estado</label>
-                            <select x-model="selectedAgent.status" class="w-full px-3 py-2 border border-gray-200 rounded-lg focus:outline-none focus:border-blue-500">
-                                <option>Activo</option>
-                                <option>Pendiente</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="flex justify-end space-x-3 mt-6">
-                        <button type="button" @click="showModal = false" class="px-4 py-2 text-gray-600 hover:text-gray-800">
-                            Cancelar
-                        </button>
-                        <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600">
-                            Guardar
-                        </button>
-                    </div>
-                </form>
-            </div>
+    <div class="flex gap-3 w-full md:w-auto">
+      <input
+        type="text"
+        id="buscador"
+        onkeyup="filtrarSolicitudes()"
+        placeholder="Buscar por nombre..."
+        class="w-full md:w-64 px-4 py-2 border border-black rounded-xl shadow-sm focus:ring focus:ring-[#BA9D79] text-sm"
+      >
+      <a
+        href="{{ route('admin.solicitud.agente')}}"
+        class="bg-[#BA9D79] text-white px-4 py-2 rounded-xl hover:bg-[#a88c6c] transition text-sm shadow-md"
+      >
+        Ver Solicitudes
+      </a>
+    </div>
+  </div>
+
+      @if (session('success'))
+        <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4">
+            {{ session('success') }}
         </div>
+    @endif
+
+ <!-- Cards -->
+  <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
+    @foreach ($agentes as $agente)
+    <div class="bg-white rounded-3xl shadow-lg transition-transform duration-300 transform hover:scale-[1.02] hover:shadow-2xl overflow-hidden relative p-6 text-black">
+      <div class="flex items-center gap-4 mb-5">
+        <img src="{{ $agente->foto_perfil ?? 'https://randomuser.me/api/portraits/lego/1.jpg' }}" alt="Foto de {{ $agente->name }}" class="w-16 h-16 rounded-full object-cover ring-4 ring-black shadow-md">
+        <div class="flex-1">
+          <h2 class="text-xl font-bold">{{ $agente->name }}</h2>
+          <p class="text-sm text-gray-600">{{ $agente->email }}</p>
+          <p class="text-sm text-gray-600">{{ $agente->phone ?? 'Teléfono no disponible' }}</p>
+        </div>
+        <span class="text-xs font-semibold px-3 py-1 rounded-full shadow-sm {{ $agente->estado === 'Activo' ? 'bg-green-100 text-green-700' : 'bg-white text-green-600' }}">
+          {{ $agente->estado ?? 'Activo' }}
+        </span>
+      </div>
+
+      <div class="flex justify-between items-center text-sm">
+              <button onclick="mostrarModal({{ $agente->id }})" class="flex items-center gap-2 text-white bg-[#BA9D79] hover:bg-black transition px-4 py-2 rounded-full font-semibold">
+          Ver más
+        </button>
+        <div class="flex gap-3">
+          <a href="" title="Editar agente" class="text-black hover:text-black transition">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
+          </svg>
+
+          </a>
+          <form action="{{route('admin.agentes.destroy', $agente->id)}}" method="POST" onsubmit="return confirm('¿Eliminar agente?')">
+            @csrf
+            @method('DELETE')
+            <button class="text-red-500 hover:text-red-700 transition" title="Eliminar agente" type="submit">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" />
+              </svg>
+
+            </button>
+          </form>
+        </div>
+      </div>
     </div>
 
-    <!-- Modal Confirmar Eliminación -->
-    <div x-show="deleteModal" 
-         class="fixed inset-0 z-50 overflow-y-auto" 
-         style="display: none;">
-        <div class="flex items-center justify-center min-h-screen px-4">
-            <div class="fixed inset-0 bg-black opacity-30" @click="deleteModal = false"></div>
-            <div class="relative bg-white rounded-lg w-full max-w-sm p-6 fade-enter">
-                <h3 class="text-lg font-semibold text-gray-800 mb-4">Confirmar Eliminación</h3>
-                <p class="text-gray-600 mb-6">¿Estás seguro de que deseas eliminar a este agente?</p>
-                <div class="flex justify-end space-x-3">
-                    <button @click="deleteModal = false" class="px-4 py-2 text-gray-600 hover:text-gray-800">
-                        Cancelar
-                    </button>
-                    <button @click="deleteAgent(selectedAgent.id)" class="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600">
-                        Eliminar
-                    </button>
-                </div>
-            </div>
+    <!-- Modal -->
+    <div id="modal-{{ $agente->id }}" onclick="cerrarModalClickFuera(event, {{ $agente->id }})" class="hidden fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50 p-4">
+      <div class="bg-white border-2 border-black rounded-xl shadow-xl max-w-lg w-full p-6 relative" onclick="event.stopPropagation()">
+        <button onclick="cerrarModal({{ $agente->id }})" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+
+        <div class="text-center">
+          <img src="{{ $agente->foto_perfil ?? 'https://randomuser.me/api/portraits/lego/1.jpg' }}" class="w-24 h-24 mx-auto rounded-full border-4 border-[#BA9D79] object-cover">
+          <h3 class="text-2xl font-bold mt-4 text-black">{{ $agente->name }}</h3>
+          <p class="text-sm text-gray-600">{{ $agente->email }}</p>
+          <p class="text-sm text-gray-600">{{ $agente->telefono }}</p>
         </div>
+
+        <div class="mt-6 text-sm text-gray-700 space-y-2">
+          <p><strong>Experiencia:</strong> {{ $agente->agente->experiencia ?? 'No especificada' }} años</p>
+          <p><strong>Zona:</strong> {{ $agente->agente->zona ?? 'No definida' }}</p>
+          <p><strong>Licencia:</strong> {{ $agente->agente->licencia ?? 'No' }}</p>
+          <p><strong>Propiedades:</strong> {{ $agente->agente->propiedades ?? 0 }}</p>
+          <p><strong>Contactos:</strong> {{ $agente->agente->usuarios_contacto ?? 0 }}</p>
+          <p><strong>Descripción:</strong> <br><span class="italic text-gray-600">{{ $agente->agente->descripcion ?? 'Sin descripción' }}</span></p>
+        </div>
+
+        <div class="mt-6 text-right">
+          <button onclick="cerrarModal({{ $agente->id }})" class="px-4 py-2 bg-[#BA9D79] text-white rounded hover:bg-[#a88c6c]">
+            Cerrar
+          </button>
+        </div>
+      </div>
     </div>
+    @endforeach
+  </div>
 </div>
+
+<script>
+  function mostrarModal(id) {
+    document.getElementById('modal-' + id).classList.remove('hidden');
+  }
+
+  function cerrarModal(id) {
+    document.getElementById('modal-' + id).classList.add('hidden');
+  }
+
+  function cerrarModalClickFuera(event, id) {
+    if (event.target.id === 'modal-' + id) {
+      cerrarModal(id);
+    }
+  }
+</script>
+
+
 
 @endsection

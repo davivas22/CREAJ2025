@@ -21,7 +21,7 @@ return new class extends Migration
             $table->enum('licencia' , ['si' , 'no'])->default('no');
             $table->string('zona');
             $table->text('mensaje');
-            $table->string('photo');
+            $table->string('photo')->nullable();
             $table->timestamps();
         });
     }

@@ -330,11 +330,8 @@
     <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
         <!-- Imagen -->
         <div class="relative group">
-  <img src="https://img.freepik.com/fotos-premium/agente-inmobiliario-raza-mixta-aislado-fondo-blanco-pensando-idea-mientras-mira-arriba_1368-309538.jpg" 
-     alt="Agente inmobiliario" 
-     class="rounded-xl shadow-lg group-hover:scale-105 transition-transform duration-500 object-cover w-full h-full" />
+  <div class="sketchfab-embed-wrapper"> <iframe title="Forest House" frameborder="0" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" allow="autoplay; fullscreen; xr-spatial-tracking" xr-spatial-tracking execution-while-out-of-viewport execution-while-not-rendered web-share width="640" height="480" src="https://sketchfab.com/models/52429e4ef7bf4deda1309364a2cda86f/embed"> </iframe> <p style="font-size: 13px; font-weight: normal; margin: 5px; color: #4A4A4A;"> <a href="https://sketchfab.com/3d-models/forest-house-52429e4ef7bf4deda1309364a2cda86f?utm_medium=embed&utm_campaign=share-popup&utm_content=52429e4ef7bf4deda1309364a2cda86f" target="_blank" rel="nofollow" style="font-weight: bold; color: #1CAAD9;"> Forest House </a> by <a href="https://sketchfab.com/peachyroyalty?utm_medium=embed&utm_campaign=share-popup&utm_content=52429e4ef7bf4deda1309364a2cda86f" target="_blank" rel="nofollow" style="font-weight: bold; color: #1CAAD9;"> peachyroyalty </a> on <a href="https://sketchfab.com?utm_medium=embed&utm_campaign=share-popup&utm_content=52429e4ef7bf4deda1309364a2cda86f" target="_blank" rel="nofollow" style="font-weight: bold; color: #1CAAD9;">Sketchfab</a></p></div>
 
-            <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent rounded-xl"></div>
         </div>
 
         <!-- Texto + Botón -->
