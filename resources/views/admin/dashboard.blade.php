@@ -4,7 +4,7 @@
  <!-- Main Content -->
         <div class="flex-1 flex flex-col overflow-hidden bg-gray-50">
             <!-- Top Navigation -->
-            <header class="bg-white border-b border-gray-200">
+            <header class="bg-white border-b border-gray-200  relative z-30">
                 <div class="px-4 sm:px-6 lg:px-8 py-4">
                     <div class="flex items-center justify-between">
                         <div class="flex items-center">
@@ -18,31 +18,44 @@
                         </div>
 
                         <div class="flex items-center space-x-6">
-                            <div class="relative">
-                                <span class="absolute inset-y-0 left-0 pl-3 flex items-center">
-                                    <i class="fas fa-search text-gray-400"></i>
-                                </span>
-                                <input type="text" class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:border-blue-500" placeholder="Buscar...">
-                            </div>
+                            
 
                           
                             
                             <!-- Notifications -->
-                            <div class="relative" x-data="notifications">
-                                <button @click="toggle()" class="p-2 text-gray-600 hover:text-gray-900 focus:outline-none">
-                                    <i class="fas fa-bell text-xl"></i>
-                                    <span x-show="notifications.some(n => n.unread)" class="absolute top-0 right-0 w-2 h-2 bg-red-500 rounded-full"></span>
-                                </button>
-                                <div x-show="open" @click.away="close" class="absolute right-0 mt-2 w-80 bg-white rounded-lg shadow-lg py-2 z-50">
-                                    <template x-for="(notification, index) in notifications" :key="index">
-                                        <div @click="markAsRead(index)" class="px-4 py-3 hover:bg-gray-50 cursor-pointer" :class="{ 'bg-blue-50': notification.unread }">
-                                            <p x-text="notification.title" class="text-sm font-medium text-gray-900"></p>
-                                            <p x-text="notification.message" class="text-xs text-gray-500"></p>
-                                            <p x-text="notification.time" class="text-xs text-gray-400 mt-1"></p>
-                                        </div>
-                                    </template>
-                                </div>
-                            </div>
+                                                <div class="relative">
+                        <button onclick="document.getElementById('notificaciones').classList.toggle('hidden')" class="relative">
+                            <!-- Campana -->
+                            <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V4a2 2 0 10-4 0v1.341C8.67 6.165 8 7.388 8 8.75v5.408c0 .538-.214 1.055-.595 1.437L6 17h5m4 0v1a2 2 0 11-4 0v-1m4 0H9" />
+                            </svg>
+
+                            <!-- Contador -->
+                            @if ($solicitudesNuevas->count() > 0)
+                            <span class="absolute -top-1 -right-1 bg-red-600 text-white text-xs px-1.5 py-0.5 rounded-full">
+                                {{ $solicitudesNuevas->count() }}
+                            </span>
+                            @endif
+                        </button>
+
+                        <!-- Dropdown -->
+                        <div id="notificaciones" class="absolute right-0 mt-2 w-72 bg-white shadow-lg rounded-lg hidden z-50">
+                            <ul>
+                            @forelse ($solicitudesNuevas as $sol)
+                                <li class="border-b px-4 py-3 hover:bg-gray-100 text-sm">
+                                <a href="{{ route('Admin.verSolicitud', $sol->id) }}" class="block text-gray-800">
+                                    Nueva solicitud para agente de <strong>{{ $sol->name }}</strong>
+                                    <br><span class="text-xs text-gray-500">{{ $sol->created_at->diffForHumans() }}</span>
+                                </a>
+                                </li>
+                            @empty
+                                <li class="px-4 py-3 text-gray-500 text-sm">No hay nuevas solicitudes</li>
+                            @endforelse
+                            </ul>
+                        </div>
+                        </div>
+
 
                             <!-- Messages -->
                             <div class="relative" x-data="messages">
@@ -50,15 +63,7 @@
                                     <i class="fas fa-envelope text-xl"></i>
                                     <span x-show="messages.some(m => m.unread)" class="absolute top-0 right-0 w-2 h-2 bg-blue-500 rounded-full"></span>
                                 </button>
-                                <div x-show="open" @click.away="close" class="absolute right-0 mt-2 w-80 bg-white rounded-lg shadow-lg py-2 z-50">
-                                    <template x-for="(message, index) in messages" :key="index">
-                                        <div @click="markAsRead(index)" class="px-4 py-3 hover:bg-gray-50 cursor-pointer" :class="{ 'bg-blue-50': message.unread }">
-                                            <p x-text="message.from" class="text-sm font-medium text-gray-900"></p>
-                                            <p x-text="message.message" class="text-xs text-gray-500"></p>
-                                            <p x-text="message.time" class="text-xs text-gray-400 mt-1"></p>
-                                        </div>
-                                    </template>
-                                </div>
+                               
                             </div>
 
                             <!-- Profile Dropdown -->

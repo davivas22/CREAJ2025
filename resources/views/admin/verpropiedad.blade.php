@@ -15,6 +15,12 @@
 
 <div class="max-w-5xl mx-auto mt-10">
 
+ @if(session('success'))
+      <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-6">
+        {{ session('success') }}
+      </div>
+    @endif
+
   <!-- Navegación de tabs mejorada -->
   <div class="flex justify-center gap-6 mb-6">
     <button onclick="showTab('info')" class="tab-btn flex flex-col items-center bg-white shadow-md px-6 py-4 rounded-xl hover:bg-dorado/10 transition border-2 border-transparent">
@@ -41,7 +47,7 @@
     </button>
   </div>
 
-  <form class="bg-white rounded-xl shadow-xl overflow-hidden" method="POST" action="{{route('agente.editar.propiedad.store', $propiedad->id)}}">
+  <form class="bg-white rounded-xl shadow-xl overflow-hidden" method="POST" action="{{route('agente.editar.propiedad.store', $propiedad->id)}}" enctype="multipart/form-data">
     @method('PUT')
     @csrf
     <div id="tab-info" class="tab-content p-6 space-y-6">

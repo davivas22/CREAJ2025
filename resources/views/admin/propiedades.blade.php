@@ -67,9 +67,6 @@
                         <a href="{{route('admin.editar.propiedades', $propiedad->id)}}" class="px-3 py-1.5 rounded bg-blue-600 text-white text-xs font-medium hover:bg-[#a3835c] transition">
                         Editar
                         </a>
-                        <a href="#" class="px-3 py-1.5 rounded bg-black text-white text-xs font-medium hover:bg-gray-800 transition">
-                        Ver
-                        </a>
                         <form action="{{route('agente.editar.propiedad.destroy' , $propiedad->id)}}" method="POST" onsubmit="return confirm('¿Eliminar esta propiedad?')">
                         @csrf
                         @method('DELETE')

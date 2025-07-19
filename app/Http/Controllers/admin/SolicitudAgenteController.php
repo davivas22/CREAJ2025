@@ -43,7 +43,7 @@ class SolicitudAgenteController extends Controller
         ]);
 
         $solicitud->delete();
-        return redirect()->back()->with('succes' , 'solicitud aceptada');
+        return redirect()->route('admin.solicitud.agente')->with('succes' , 'solicitud aceptada');
     }
     public function rechazar(Solicitud $solicitud){
         $solicitud->delete();

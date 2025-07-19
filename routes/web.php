@@ -5,6 +5,7 @@ use App\Http\Controllers\admin\DashboardController;
 use App\Http\Controllers\admin\PropiedadController;
 use App\Http\Controllers\admin\PropiedadEditarController;
 use App\Http\Controllers\admin\SolicitudAgenteController;
+use App\Http\Controllers\admin\VerSolicitudController;
 use App\Http\Controllers\agent\CrearController;
 use App\Http\Controllers\agent\DashboarAgentController;
 use App\Http\Controllers\agent\PerfilController;
@@ -40,10 +41,11 @@ Route::get('/dashboard',[DashboardController::class,'index'])->name('admin.dashb
 Route::get('/page/propiedades',[PropiedadController::class,'index'])->name('admin.propiedades')->middleware('auth','role:admin');
 Route::get('/page/editar/propiedad/{propiedad}',[PropiedadEditarController::class,'index'])->name('admin.editar.propiedades')->middleware('auth','role:admin');
 Route::get('/Agente',[AgenteController::class,'index'])->name('admin.agentes')->middleware('auth','role:admin');
-Route::delete('/admin/Agente/{agente}',[AgenteController::class,'destroy'])->name('admin.agentes.destroy');
+Route::delete('/admin/agentes/{agente}',[AgenteController::class,'destroy'])->name('admin.agentes.destroy');
 Route::get('/solicitud',[SolicitudAgenteController::class,'index'])->name('admin.solicitud.agente')->middleware('auth','role:admin');
 Route::post('/admin/solicitudes/{solicitud}/aceptar', [SolicitudAgenteController::class, 'aceptar'])->name('admin.solicitudes.aceptar');
 Route::post('/admin/solicitudes/{solicitud}/rechazar', [SolicitudAgenteController::class, 'rechazar'])->name('admin.solicitudes.rechazar');
+Route::get('/Solicitud/{solicitud}/',[VerSolicitudController::class,'show'])->name('Admin.verSolicitud')->middleware('auth','role:admin');
 
 //AGENTE SECCIONES
 Route::get('/agente/dashboard',[DashboarAgentController::class,'index'])->name('agente.index')->middleware('auth','role:agente');

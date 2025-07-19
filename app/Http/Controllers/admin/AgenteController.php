@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 class AgenteController extends Controller
 {
     public function index(){
-        $agentes = User::role('agente')->with('agente')->get();
+        $agentes = User::role('agente')->with(['agente','propiedad'])->get();
         return view('admin.agentes',[
             'agentes' => $agentes,
         ]);

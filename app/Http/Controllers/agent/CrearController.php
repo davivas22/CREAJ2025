@@ -27,7 +27,7 @@ class CrearController extends Controller
         'area_construccion' => 'required|integer|min:0',
         'ubicacion' => 'required|string|max:255',
         'imagenes' => 'required|array|min:1', // ✅ Espera al menos 1 imagen
-        'imagenes.*' => 'image|mimes:jpg,jpeg,png|max:2048' // ✅ Cada archivo debe ser una imagen válida
+        'imagenes.*' => 'image|mimes:jpg,jpeg,png,webp,avif|max:2048' // ✅ Cada archivo debe ser una imagen válida
     ]);
    
     $propiedad = Propertie::create([
@@ -120,6 +120,6 @@ class CrearController extends Controller
 
       $propiedad->delete();
 
-      return redirect()->route('agente.propiedades')->with('success' , 'Propiedad eliminada correctamente');
+      return back()->with('success' , 'Propiedad eliminada correctamente');
     }
 }
