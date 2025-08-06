@@ -1,145 +1,188 @@
 @extends('layout.sidebaragent')
 
 @section('contenido')
-<div class="max-w-6xl mx-auto mt-10 bg-white rounded-2xl shadow-xl border border-gray-200 overflow-hidden">
-  <!-- Formulario profesional arriba -->
-  <div class="p-8 bg-white">
- <!-- Título centrado y botón "Eliminar" a la derecha -->
-<div class="flex justify-between items-center mb-4">
-  <h2 class="text-3xl font-bold text-gray-800 text-center w-full">Editar Propiedad</h2>
-  <form action="{{ route('agente.editar.propiedad.destroy', $propiedad->id) }}" method="POST" onsubmit="return confirm('¿Estás seguro de que deseas eliminar esta propiedad?');" class="relative text-center">
-    @csrf
-    @method('DELETE')
-    <button type="submit" class="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 shadow relative">
-       Eliminar
-    </button>
-  </form>
-</div>
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            dorado: '#BA9D79'
+          }
+        }
+      }
+    }
+  </script>
 
-    @if(session('success'))
+<div class="max-w-5xl mx-auto mt-10">
+
+ @if(session('success'))
       <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-6">
         {{ session('success') }}
       </div>
     @endif
 
-    <form action="{{route('agente.editar.propiedad.store',$propiedad->id)}}" method="POST" enctype="multipart/form-data" class="space-y-6">
-      @csrf
-      @method('PUT')
+  <!-- Navegación de tabs mejorada -->
+  <div class="flex justify-center gap-6 mb-6">
+    <button onclick="showTab('info')" class="tab-btn flex flex-col items-center bg-white shadow-md px-6 py-4 rounded-xl hover:bg-dorado/10 transition border-2 border-transparent">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="#BA9D79" class="size-6">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z" />
+</svg>
 
-      <div>
-        <label class="block text-gray-700 font-semibold mb-1">Título</label>
-        <input type="text" name="titulo" value="{{ old('titulo', $propiedad->titulo) }}" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-dorado/50">
-        @error('titulo')<p class="text-red-500 text-sm mt-1">{{ $message }}</p>@enderror
-      </div>
+      <span class="font-semibold text-sm text-gray-700">Información</span>
+    </button>
+    <button onclick="showTab('ubicacion')" class="tab-btn flex flex-col items-center bg-white shadow-md px-6 py-4 rounded-xl hover:bg-dorado/10 transition border-2 border-transparent">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="#BA9D79" class="size-6">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+        <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
+        </svg>
 
-      <div>
-        <label class="block text-gray-700 font-semibold mb-1">Descripción</label>
-        <textarea name="descripcion" rows="4" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-dorado/50">{{ old('descripcion', $propiedad->descripcion) }}</textarea>
-        @error('descripcion')<p class="text-red-500 text-sm mt-1">{{ $message }}</p>@enderror
-      </div>
+      <span class="font-semibold text-sm text-gray-700">Ubicación</span>
+    </button>
+    <button onclick="showTab('imagenes')" class="tab-btn flex flex-col items-center bg-white shadow-md px-6 py-4 rounded-xl hover:bg-dorado/10 transition border-2 border-transparent">
+     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="#BA9D79" class="size-6">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 0 0 1.5-1.5V6a1.5 1.5 0 0 0-1.5-1.5H3.75A1.5 1.5 0 0 0 2.25 6v12a1.5 1.5 0 0 0 1.5 1.5Zm10.5-11.25h.008v.008h-.008V8.25Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
+</svg>
 
+      <span class="font-semibold text-sm text-gray-700">Imágenes</span>
+    </button>
+  </div>
+
+  <form class="bg-white rounded-xl shadow-xl overflow-hidden" method="POST" action="{{route('agente.editar.propiedad.store', $propiedad->id)}}" enctype="multipart/form-data">
+    @method('PUT')
+    @csrf
+    <div id="tab-info" class="tab-content p-6 space-y-6">
+      <h2 class="text-2xl font-bold text-dorado border-b pb-2">Información de la Propiedad</h2>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>
-          <label class="block text-gray-700 font-semibold mb-1">Precio</label>
-          <input type="number" step="0.01" name="precio" value="{{ old('precio', $propiedad->precio) }}" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-dorado/50">
-          @error('precio')<p class="text-red-500 text-sm mt-1">{{ $message }}</p>@enderror
+          <label class="text-sm text-gray-600 font-medium mb-1 block">Título</label>
+          <input value="{{$propiedad->titulo}}" type="text" name="titulo" placeholder="Título" class="border p-3 rounded-md w-full">
         </div>
         <div>
-          <label class="block text-gray-700 font-semibold mb-1">Tipo</label>
-          <select name="tipo" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-dorado/50">
-            <option value="casa" {{ $propiedad->tipo == 'casa' ? 'selected' : '' }}>Casa</option>
-            <option value="apartamento" {{ $propiedad->tipo == 'apartamento' ? 'selected' : '' }}>Apartamento</option>
-            <option value="terreno" {{ $propiedad->tipo == 'terreno' ? 'selected' : '' }}>Terreno</option>
+          <label class="text-sm text-gray-600 font-medium mb-1 block">Precio</label>
+          <input  value="{{$propiedad->precio}}" type="number" name="precio" placeholder="Precio" class="border p-3 rounded-md w-full">
+        </div>
+        <div>
+          <label class="text-sm text-gray-600 font-medium mb-1 block">Tipo</label>
+          <select name="tipo" class="border p-3 rounded-md w-full">
+            <option value="casa">Casa</option>
+            <option value="apartamento">Apartamento</option>
           </select>
-          @error('tipo')<p class="text-red-500 text-sm mt-1">{{ $message }}</p>@enderror
+        </div>
+
+        <div>
+            <label class="text-sm text-gray-600 font-medium mb-1 block">Estado</label>
+            <select name="estado" class="border p-3 rounded-md w-full">
+                <option value="usada" {{ old('estado', $propiedad->estado ?? '') == 'usada' ? 'selected' : '' }}>Usada</option>
+                <option value="remodelada" {{ old('estado', $propiedad->estado ?? '') == 'remodelada' ? 'selected' : '' }}>Remodelada</option>
+                <option value="nueva" {{ old('estado', $propiedad->estado ?? '') == 'nueva' ? 'selected' : '' }}>Nueva</option>
+            </select>
+            </div>
+        <div class="md:col-span-2">
+          <label class="text-sm text-gray-600 font-medium mb-1 block">Descripción</label>
+          <textarea name="descripcion" placeholder="Descripción" rows="3" class="border p-3 rounded-md w-full">{{$propiedad->descripcion}}</textarea>
         </div>
       </div>
+    </div>
 
-      <!-- Parámetros adicionales -->
+    <div id="tab-ubicacion" class="tab-content p-6 hidden space-y-6">
+      <h2 class="text-2xl font-bold text-dorado border-b pb-2">Ubicación</h2>
+      <div>
+        <label class="text-sm text-gray-600 font-medium mb-1 block">Dirección exacta</label>
+        <input value="{{$propiedad->ubicacion}}" type="text" name="ubicacion" placeholder="Dirección exacta" class="border p-3 rounded-md w-full">
+      </div>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
         <div>
-          <label for="habitaciones" class="block text-sm font-medium text-gray-700">Habitaciones</label>
-          <input type="number" id="habitaciones" name="habitaciones" min="0" value="{{ old('habitaciones', $propiedad->habitaciones) }}" class="mt-1 block w-full rounded-md border border-gray-300 shadow-sm focus:ring-dorado focus:border-dorado">
-          @error('habitaciones')<p class="text-sm text-red-600 mt-1">{{ $message }}</p>@enderror
+          <label class="text-sm text-gray-600 font-medium mb-1 block">Área terreno (m²)</label>
+          <input value="{{$propiedad->area_terreno}}" type="number" name="area_terreno" placeholder="Área terreno (m²)" class="border p-3 rounded-md w-full">
         </div>
-
         <div>
-          <label for="banos" class="block text-sm font-medium text-gray-700">Baños</label>
-          <input type="number" id="banos" name="banos" min="0" value="{{ old('banos', $propiedad->banos) }}" class="mt-1 block w-full rounded-md border border-gray-300 shadow-sm focus:ring-dorado focus:border-dorado">
-          @error('banos')<p class="text-sm text-red-600 mt-1">{{ $message }}</p>@enderror
-        </div>
-
-        <div>
-          <label for="parqueos" class="block text-sm font-medium text-gray-700">Parqueos</label>
-          <input type="number" id="parqueos" name="parqueos" min="0" value="{{ old('parqueos', $propiedad->parqueos) }}" class="mt-1 block w-full rounded-md border border-gray-300 shadow-sm focus:ring-dorado focus:border-dorado">
-          @error('parqueos')<p class="text-sm text-red-600 mt-1">{{ $message }}</p>@enderror
+          <label class="text-sm text-gray-600 font-medium mb-1 block">Área construida (m²)</label>
+          <input  value="{{$propiedad->area_construccion}}" type="number" name="area_construccion" placeholder="Área construida (m²)" class="border p-3 rounded-md w-full">
         </div>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div>
-          <label for="terreno" class="block text-sm font-medium text-gray-700">Área del terreno (m²)</label>
-          <input type="number" id="terreno" name="area_terreno" min="0" value="{{ old('area_terreno', $propiedad->area_terreno) }}" class="mt-1 block w-full rounded-md border border-gray-300 shadow-sm focus:ring-dorado focus:border-dorado">
-          @error('terreno')<p class="text-sm text-red-600 mt-1">{{ $message }}</p>@enderror
-        </div>
 
-        <div>
-          <label for="construccion" class="block text-sm font-medium text-gray-700">Área construida (m²)</label>
-          <input type="number" id="construccion" name="area_construccion" min="0" value="{{ old('area_construccion', $propiedad->area_construccion) }}" class="mt-1 block w-full rounded-md border border-gray-300 shadow-sm focus:ring-dorado focus:border-dorado">
-          @error('construccion')<p class="text-sm text-red-600 mt-1">{{ $message }}</p>@enderror
-        </div>
-      </div>
+          <!-- Mapa interactivo -->
+   <div id="map" class="w-full h-[400px] rounded-xl border shadow"></div>
 
-      <!-- Ubicación -->
-      <div class="space-y-6">
-        <h3 class="text-lg font-semibold text-gray-700 border-b border-gray-200 pb-2">Ubicación</h3>
-        <div>
-          <label for="ubicacion" class="block text-sm font-medium text-gray-700">Dirección / Colonia / Zona</label>
-          <input type="text" id="ubicacion" name="ubicacion" value="{{ old('ubicacion', $propiedad->ubicacion) }}" required class="mt-1 block w-full rounded-md border border-gray-300 shadow-sm focus:ring-dorado focus:border-dorado">
-          @error('ubicacion')<p class="text-sm text-red-600 mt-1">{{ $message }}</p>@enderror
-        </div>
-      </div>
 
-      <div>
-        <label class="block text-gray-700 font-semibold mb-1">Subir nuevas imágenes</label>
-        <input type="file" name="imagenes[]" multiple class="w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-dorado/50">
-        @error('imagenes')<p class="text-red-500 text-sm mt-1">{{ $message }}</p>@enderror
-      </div>
+    <!-- Inputs hidden -->
+    <input type="hidden" name="lat" id="lat" value="{{ old('lat', $propiedad->lat) }}">
+    <input type="hidden" name="lng" id="lng" value="{{ old('lng', $propiedad->lng) }}">
 
-      <div class="flex justify-end gap-4">
-        <a href="{{route('agente.propiedades')}}" class="px-4 py-2 bg-gray-200 text-gray-700 rounded hover:bg-gray-300">Cancelar</a>
-        <button type="submit" class="px-6 py-2 bg-dorado text-white rounded hover:bg-dorado/80">Guardar Cambios</button>
-      </div>
-    </form>
-  </div>
-
-  <!-- Slider al final -->
-  <div class="w-full relative overflow-hidden rounded-b-2xl mt-6">
-    <div id="slider" class="flex transition-transform duration-700 ease-in-out">
-      @foreach($propiedad->imagenes as $imagen)
-        <img src="/{{ $imagen->ruta }}" alt="Imagen propiedad" class="w-full max-h-[300px] object-contain flex-shrink-0">
-      @endforeach
     </div>
-    <button type="button" onclick="moveSlide(-1)" class="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white/80 hover:bg-white text-black px-3 py-2 rounded-full shadow-md transition">←</button>
-    <button type="button" onclick="moveSlide(1)" class="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white/80 hover:bg-white text-black px-3 py-2 rounded-full shadow-md transition">→</button>
-  </div>
+
+    <div id="tab-imagenes" class="tab-content p-6 hidden space-y-6">
+      <h2 class="text-2xl font-bold text-dorado border-b pb-2">Imágenes</h2>
+      <label class="text-sm text-gray-600 font-medium mb-1 block">Subir nuevas imágenes</label>
+      <input type="file" name="imagenes[]" multiple class="border p-3 rounded-md w-full">
+      <div class="flex flex-wrap gap-4">
+        @foreach($propiedad->imagenes as $imagen)
+          <div class="w-24 h-24 rounded-md overflow-hidden bg-gray-100 border">
+            <img src="/{{ $imagen->ruta }}" class="object-cover w-full h-full" alt="Imagen">
+          </div>
+        @endforeach
+      </div>
+    </div>
+
+    <div class="flex justify-between px-6 py-4 border-t mt-4 bg-gray-50 rounded-b-xl">
+      <a href="{{route('admin.agentes')}}" class="px-4 py-2 rounded bg-gray-200 hover:bg-gray-300 text-gray-700">Cancelar</a>
+      <button type="submit" class="px-6 py-2 rounded bg-dorado text-white hover:bg-[#a3835c]">Guardar Cambios</button>
+    </div>
+  </form>
 </div>
 
 <script>
-  document.addEventListener('DOMContentLoaded', function () {
-    const slider = document.getElementById('slider');
-    const slides = slider.children;
-    let index = 0;
+ function showTab(tab) {
+  document.querySelectorAll('.tab-content').forEach(c => c.classList.add('hidden'));
+  document.querySelector(`#tab-${tab}`).classList.remove('hidden');
 
-    function moveSlide(direction) {
-      index += direction;
-      if (index < 0) index = slides.length - 1;
-      if (index >= slides.length) index = 0;
-      slider.style.transform = `translateX(-${index * 100}%)`;
-    }
+  document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('border-dorado', 'bg-dorado/10'));
+  event.currentTarget.classList.add('border-dorado', 'bg-dorado/10');
 
-    window.moveSlide = moveSlide;
-    setInterval(() => moveSlide(1), 6000);
-  });
+  if (tab === 'ubicacion' && typeof map !== 'undefined') {
+    setTimeout(() => {
+      map.invalidateSize();
+    }, 200);
+  }
+}
+
 </script>
+
+<script>
+    function initMap() {
+      // Obtener lat y lng de los campos ocultos
+      const lat = parseFloat(document.getElementById("lat").value) || 13.6929;  // Valor por defecto si no hay datos previos
+      const lng = parseFloat(document.getElementById("lng").value) || -89.2182;
+
+      // Crear el mapa centrado en la ubicación de la propiedad
+      const map = new google.maps.Map(document.getElementById("map"), {
+        center: { lat: lat, lng: lng },
+        zoom: 9,  // Nivel de zoom
+      });
+
+      // Crear un marcador en la ubicación actual de la propiedad
+      let marker = new google.maps.Marker({
+        position: { lat: lat, lng: lng },
+        map: map,
+        title: "Ubicación de la propiedad",
+      });
+
+      // Añadir evento de clic para mover el marcador
+      google.maps.event.addListener(map, "click", function(event) {
+        // Mover el marcador al lugar donde se hizo clic
+        marker.setPosition(event.latLng);
+
+        // Actualizar los valores de lat y lng en los campos ocultos
+        document.getElementById("lat").value = event.latLng.lat();
+        document.getElementById("lng").value = event.latLng.lng();
+      });
+    }
+  </script>
+
+
+
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC6rLn1Fnx9hlBPRk7zVQUssjIvJGqQuYE&callback=initMap" async defer></script>
+
 @endsection

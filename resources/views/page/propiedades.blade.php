@@ -1,107 +1,170 @@
 @extends('layout.app')
 
 @section('content')
-  <!-- Hero con imagen de fondo -->
-<section class="relative h-[60vh] bg-cover bg-center flex items-center justify-center" style="background-image: url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c');">
-    <div class="bg-black bg-opacity-60 w-full h-full absolute inset-0"></div>
-    <div class="relative z-10 text-center text-white px-4">
-        <h1 class="text-4xl font-bold mb-2">Encuentra tu propiedad ideal</h1>
-        <p class="text-lg">Explora nuestra selección exclusiva de propiedades y encuentra el hogar de tus sueños.</p>
-    </div>
-</section>
+  <style>
+    #map { height: 800px; width: 100%; } 
+    
+ 
+    .highlight {
+        border: 2px solid #FF0000; 
+        box-shadow: 0 0 15px rgba(255, 0, 0, 0.7); 
+        background-color: #f9f9f9; 
+    }
+  </style>
 
-<!-- Filtro -->
-<section class="max-w-7xl mx-auto px-4 mt-[-4rem] z-20 relative">
-    <div class="bg-white rounded-xl shadow-lg p-6 grid grid-cols-1 md:grid-cols-5 gap-4">
-        <select class="w-full border border-gray-300 rounded-md px-4 py-2">
-            <option selected disabled>Tipo</option>
-            <option>Casa</option>
-            <option>Apartamento</option>
+  <div class="max-w-7xl mx-auto px-6 py-8">
+    <!-- Filtros -->
+    <div class="flex flex-col md:flex-row justify-between items-center mb-6 gap-4">
+      <div class="flex-1">
+        <input type="text" placeholder="Buscar ciudad o zona..." class="w-full py-3 px-5 rounded-full shadow-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-dorado">
+      </div>
+      <div class="flex flex-wrap gap-2 items-center">
+        <select class="px-4 py-2 rounded-full border border-gray-300 text-sm bg-white shadow-sm">
+          <option>Tipo</option>
+          <option>Casa</option>
+          <option>Apartamento</option>
         </select>
-        <select class="w-full border border-gray-300 rounded-md px-4 py-2">
-            <option selected disabled>Ubicación</option>
-            <option>San Salvador</option>
-            <option>Santa Ana</option>
+        <select class="px-4 py-2 rounded-full border border-gray-300 text-sm bg-white shadow-sm">
+          <option>Precio</option>
+          <option>$0 - $100k</option>
+          <option>$100k - $200k</option>
         </select>
-        <select class="w-full border border-gray-300 rounded-md px-4 py-2">
-            <option selected disabled>Precio máximo</option>
-            <option>$50,000</option>
-            <option>$100,000</option>
-            <option>$200,000+</option>
+        <select class="px-4 py-2 rounded-full border border-gray-300 text-sm bg-white shadow-sm">
+          <option>Habitaciones</option>
+          <option>1</option>
+          <option>2</option>
         </select>
-        <select class="w-full border border-gray-300 rounded-md px-4 py-2">
-            <option selected disabled>Habitaciones</option>
-            <option>1+</option>
-            <option>2+</option>
-            <option>3+</option>
-        </select>
-        <button class="bg-[#BA9D79] text-white rounded-md px-6 py-2 hover:bg-[#a88a67] transition">Buscar</button>
+        <button class="px-4 py-2 rounded-full border border-gray-300 text-sm bg-white shadow-sm hover:bg-gray-100">Más filtros</button>
+      </div>
     </div>
-</section>
 
-<!-- Cards dinámicas -->
-<section class="max-w-7xl mx-auto px-4 py-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-    @for($i = 0; $i < 6; $i++)
-    <div class="group bg-white shadow-md rounded-2xl overflow-hidden transform transition duration-500 hover:scale-[1.03] hover:shadow-2xl">
-        <div class="relative">
-            <img src="https://www.construyehogar.com/wp-content/uploads/2016/01/Casa-moderna-un-piso.jpg" class="w-full h-56 object-cover transition duration-300 group-hover:brightness-90">
-            <span class="absolute top-3 left-3 bg-[#BA9D79] text-white text-xs px-3 py-1 rounded-full uppercase tracking-wide">Venta</span>
-            <button class="absolute top-3 right-3 bg-white p-2 rounded-full shadow hover:scale-110 transition">
-                <!-- Heroicon: Heart -->
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-[#BA9D79]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 016.364 0L12 7.636l1.318-1.318a4.5 4.5 0 116.364 6.364L12 21.364 4.318 12.682a4.5 4.5 0 010-6.364z" />
-                </svg>
-            </button>
-        </div>
-        <div class="p-5">
-            <h3 class="text-lg font-semibold text-black">Casa moderna en San Salvador</h3>
-            <p class="text-sm text-gray-600 mb-3">Diseño moderno, espacios amplios y acabados de lujo.</p>
-            <div class="flex justify-between text-sm text-gray-600 mb-3">
-                <div class="flex items-center gap-1">
-                    <!-- Heroicon: Map Pin -->
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 11c1.657 0 3-1.343 3-3S13.657 5 12 5 9 6.343 9 8s1.343 3 3 3z" />
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21l-7-7-7 7" />
-                    </svg>
-                    San Salvador
-                </div>
-                <div class="flex items-center gap-1 text-yellow-500">
-                    <!-- Heroicon: Star -->
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 20 20" fill="currentColor">
-                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.175 3.617a1 1 0 00.95.69h3.813c.969 0 1.371 1.24.588 1.81l-3.084 2.24a1 1 0 00-.364 1.118l1.175 3.617c.3.921-.755 1.688-1.54 1.118l-3.084-2.24a1 1 0 00-1.176 0l-3.084 2.24c-.784.57-1.838-.197-1.539-1.118l1.174-3.617a1 1 0 00-.364-1.118L2.535 9.044c-.783-.57-.38-1.81.588-1.81h3.813a1 1 0 00.951-.69l1.175-3.617z" />
-                    </svg>
-                    4.9
-                </div>
+    <!-- Contenido principal -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <!-- Columna de tarjetas -->
+      <div class="h-[600px] overflow-y-auto space-y-6 pr-2">
+        @foreach ($propiedades as $propiedad)
+          <div 
+            id="card-{{ $propiedad->id }}"
+            data-id="{{ $propiedad->id }}"
+            class="card-propiedad bg-white rounded-2xl shadow-md overflow-hidden flex flex-col md:flex-row transform transition-all duration-300 hover:shadow-xl hover:-translate-y-1 hover:scale-[1.02] group cursor-pointer"
+            data-lat="{{ $propiedad->latitud }}"
+            data-lng="{{ $propiedad->longitud }}"
+            data-titulo="{{ $propiedad->titulo }}"
+            data-ubicacion="{{ $propiedad->ubicacion }}"
+            data-precio="{{ $propiedad->precio }}"
+          >
+            <!-- Imagen -->
+            <div class="relative w-full md:w-1/3 h-48 md:h-auto">
+              <img src="{{ asset($propiedad->imagenes->first()->ruta ?? 'images/default.jpg') }}" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110">
             </div>
-            <div class="flex justify-between text-gray-600 text-sm mb-4">
-                <div class="flex items-center gap-1">
-                    <!-- Heroicon: Expand -->
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V6a2 2 0 012-2h2m8 0h2a2 2 0 012 2v2m0 8v2a2 2 0 01-2 2h-2m-8 0H6a2 2 0 01-2-2v-2" />
+
+            <!-- Información -->
+            <div class="p-5 flex flex-col justify-between flex-grow">
+              <div>
+                <h3 class="text-lg font-bold text-gray-800 mb-1 group-hover:text-dorado transition-colors duration-300">{{ $propiedad->titulo }}</h3>
+                <p class="text-sm text-gray-500 mb-3">{{ $propiedad->ubicacion }}</p>
+
+                <!-- Íconos -->
+                <div class="grid grid-cols-2 gap-x-4 gap-y-2 text-gray-600 text-sm">
+                  <div class="flex items-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-dorado" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M4 6h16v10H4z" />
                     </svg>
-                    110 m²
-                </div>
-                <div class="flex items-center gap-1">
-                    <!-- Heroicon: Home -->
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9l9-7 9 7v11a2 2 0 01-2 2h-4a2 2 0 01-2-2v-4H9v4a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
+                    {{ $propiedad->habitaciones }} hab.
+                  </div>
+                  <div class="flex items-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-dorado" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6M7 16h10a2 2 0 002-2V6H5v8a2 2 0 002 2z" />
                     </svg>
-                    2 hab
-                </div>
-                <div class="flex items-center gap-1">
-                    <!-- Heroicon: Toilet (usamos outline square icon como reemplazo) -->
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 10h12v4H6z" />
+                    {{ $propiedad->banos }} baños
+                  </div>
+                  <div class="flex items-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-dorado" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 16V9a1 1 0 011-1h12a1 1 0 011 1v7M5 16h14v2a1 1 0 01-1 1h-1a1 1 0 01-1-1v-1H8v1a1 1 0 01-1 1H6a1 1 0 01-1-1v-2z" />
                     </svg>
-                    2 baños
+                    {{ $propiedad->parqueos }} parqueo
+                  </div>
+                  <div class="flex items-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-dorado" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4h16v16H4V4z" />
+                    </svg>
+                    {{ $propiedad->area_terreno }} m²
+                  </div>
                 </div>
+              </div>
+
+              <!-- Precio y botón -->
+              <div class="flex justify-between items-end mt-4">
+                <span class="text-xl font-bold text-dorado">${{ number_format($propiedad->precio, 2) }}</span>
+                <button class=" bg-[#BA9D79] text-white px-4 py-2 rounded-full text-sm hover:bg-yellow-700 transition duration-300">Contactar</button>
+              </div>
             </div>
-            <div class="flex items-center justify-between">
-                <span class="text-[#BA9D79] font-bold text-xl">$245,000</span>
-                <a href="#" class="text-white bg-black px-4 py-2 rounded-md hover:bg-gray-800 transition text-sm">Ver detalles</a>
-            </div>
-        </div>
+          </div>
+        @endforeach
+      </div>
+
+      <!-- Columna del mapa -->
+      <div class="rounded-xl shadow-md overflow-hidden h-[600px]">
+        <div id="map" class="w-full h-full"></div>
+      </div>
     </div>
-    @endfor
-</section>
+  </div>
+
+  <script>
+    let lastHighlightedCard = null;  // Variable para almacenar la última tarjeta resaltada
+
+    function initMap() {
+        const map = new google.maps.Map(document.getElementById('map'), {
+            center: { lat: 13.6929, lng: -89.2182 },
+            zoom: 9
+        });
+
+        const propiedades = @json($propiedades);
+
+        propiedades.forEach(function(propiedad) {
+            // Verifica que las coordenadas no sean nulas ni vacías
+            const lat = propiedad.lat ? parseFloat(propiedad.lat) : null;
+            const lng = propiedad.lng ? parseFloat(propiedad.lng) : null;
+
+            // Si las coordenadas son nulas o no son números válidos, se omiten
+            if (lat === null || lng === null || isNaN(lat) || isNaN(lng)) {
+                console.error("Invalid or missing coordinates for property:", propiedad);
+                return;  // Ignora esta propiedad si no tiene coordenadas válidas
+            }
+
+            // Crear un marcador
+            const marker = new google.maps.Marker({
+                position: { lat: lat, lng: lng },
+                map: map,
+                title: propiedad.titulo
+            });
+
+            // Asociar el marcador con la tarjeta correspondiente
+            marker.addListener('click', function() {
+                // Eliminar resaltado de la tarjeta previamente seleccionada
+                if (lastHighlightedCard) {
+                    lastHighlightedCard.classList.remove('highlight');
+                }
+
+                // Resaltar la tarjeta de la propiedad al hacer clic en el marcador
+                const card = document.querySelector(`#card-${propiedad.id}`);
+                if (card) {
+                    // Aplica el estilo de resaltar la tarjeta
+                    card.classList.add('highlight'); // Usamos una clase CSS para resaltar
+                    card.scrollIntoView({ behavior: 'smooth', block: 'center' });  // Mueve la tarjeta al centro
+                }
+
+                // Actualizar la última tarjeta resaltada
+                lastHighlightedCard = document.querySelector(`#card-${propiedad.id}`);
+            });
+        });
+    }
+
+    window.onload = function() {
+        initMap();
+    };
+  </script>
+
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC6rLn1Fnx9hlBPRk7zVQUssjIvJGqQuYE&callback=initMap" async defer></script>
+
 @endsection

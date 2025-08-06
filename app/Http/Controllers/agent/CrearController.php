@@ -13,7 +13,7 @@ class CrearController extends Controller
     }
 
     public function store(Request $request){
-              // ✅ 1. VALIDACIÓN de todos los campos
+              //  VALIDACIÓN de todos los campos
     $validated = $request->validate([
         'titulo' => 'required|string|max:255',
         'descripcion' => 'required|string',
@@ -26,9 +26,12 @@ class CrearController extends Controller
         'area_terreno' => 'required|integer|min:0',
         'area_construccion' => 'required|integer|min:0',
         'ubicacion' => 'required|string|max:255',
-        'imagenes' => 'required|array|min:1', // ✅ Espera al menos 1 imagen
-        'imagenes.*' => 'image|mimes:jpg,jpeg,png,webp,avif|max:2048' // ✅ Cada archivo debe ser una imagen válida
+        'imagenes' => 'required|array|min:1', 
+        'imagenes.*' => 'image|mimes:jpg,jpeg,png,webp,avif|max:2048' ,
+        'lat' => 'required|numeric',
+        'lng' => 'required|numeric',
     ]);
+
    
     $propiedad = Propertie::create([
         'titulo' => $validated['titulo'],
@@ -43,6 +46,8 @@ class CrearController extends Controller
         'area_construccion' => $validated['area_construccion'],
         'ubicacion' => $validated['ubicacion'],
         'user_id' => auth()->user()->id,
+        'lat' => $validated['lat'],
+        'lng' => $validated['lng'],
     ]);
 
     //subir y guardar cada imagen en la db de imagenes
@@ -75,6 +80,8 @@ class CrearController extends Controller
         'area_construccion' => 'nullable|numeric|min:0',
         'ubicacion' => 'required|string|max:255',
         'imagenes.*' => 'image|mimes:jpg,jpeg,png,webp|max:2048',
+        'lat' => 'numeric',
+        'lng' => 'numeric'
     ]);
 
     // Actualizar los datos de la propiedad
@@ -89,6 +96,8 @@ class CrearController extends Controller
         'area_terreno' => $request->area_terreno,
         'area_construccion' => $request->area_construccion,
         'ubicacion' => $request->ubicacion,
+        'lat' => $request->lat,
+        'lng' => $request->lng
     ]);
 
     // Subir nuevas imágenes si se enviaron

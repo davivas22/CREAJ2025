@@ -58,6 +58,7 @@ class SolicitudController extends Controller
         'mensaje'     => $validated['descripcion'],
         'photo'       => $user->foto_perfil ?? null,
         'razon'       => $validated['razon'] ?? null, // campo extra que agregaste
+        'visto'       => false
         ]);
 
         return back()->with('success', 'Solicitud enviada correctamente');

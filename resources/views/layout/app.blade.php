@@ -8,6 +8,9 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css" />
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
     @vite(['resources/css/app.css', 'resources/js/page/index.js'])
     <style>
         .parallax-scroll {
@@ -131,15 +134,16 @@
                 <div class="relative inline-block text-left" id="user-menu">
                     <!-- Botón del avatar -->
                    <button onclick="toggleMenu()" class="flex items-center justify-center w-10 h-10 rounded-full bg-black text-white font-bold focus:outline-none overflow-hidden">
-                        <img src="{{ asset(auth()->user()->foto_perfil) }}" alt="Foto perfil"
+                        <img src="{{ auth()->user()->foto_perfil ? asset(auth()->user()->foto_perfil) : asset('photos/6c55d49dd6839b5b79e84a1aa6d2260d.jpg') }}" alt="Foto perfil"
                             class="w-full h-full object-cover rounded-full">
                     </button>
 
                     <!-- Menú desplegable -->
                     <div id="dropdownMenu" class="origin-top-right absolute right-0 mt-2 w-48 rounded-lg shadow-lg bg-white ring-1 ring-black ring-opacity-5 hidden z-50">
                         <div class="py-1 text-sm text-gray-800">
-                            <a href="#" class="block px-4 py-2 hover:bg-[#BA9D79] hover:text-white transition">Perfil</a>
+                            <a href="{{route('page.perfil',auth()->user()->id)}}" class="block px-4 py-2 hover:bg-[#BA9D79] hover:text-white transition">Perfil</a>
                             <a href="#" onclick="document.getElementById('logout-form').submit()" class="block px-4 py-2 hover:bg-[#BA9D79] hover:text-white transition">Cerrar sesión</a>
+                             <a href="{{route('page.solicitud')}}" class="block px-4 py-2 hover:bg-[#BA9D79] hover:text-white transition">Convertirse en agente</a>
                         </div>
                     </div>
 
@@ -167,6 +171,8 @@
                 <a href="{{route('page.propiedades')}}" class="block py-2 text-[#5E5E5E] hover:text-[#BA9D79]">Propiedades</a>
                 <a href="#" class="block py-2 text-[#5E5E5E] hover:text-[#BA9D79]">Contacto</a>
                 <a href="{{route('login')}}" class="block py-2 mt-2 text-center border border-[#BA9D79] text-[#BA9D79] rounded-full hover:bg-[#BA9D79] hover:text-[#F4F4F4] transition-all duration-300">Iniciar sesión</a>
+               
+
             </div>
         </div>
     </header>

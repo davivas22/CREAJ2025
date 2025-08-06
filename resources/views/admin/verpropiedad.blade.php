@@ -116,7 +116,7 @@
     </div>
 
     <div class="flex justify-between px-6 py-4 border-t mt-4 bg-gray-50 rounded-b-xl">
-      <a href="#" class="px-4 py-2 rounded bg-gray-200 hover:bg-gray-300 text-gray-700">Cancelar</a>
+      <a href="{{route('admin.agentes')}}" class="px-4 py-2 rounded bg-gray-200 hover:bg-gray-300 text-gray-700">Cancelar</a>
       <button type="submit" class="px-6 py-2 rounded bg-dorado text-white hover:bg-[#a3835c]">Guardar Cambios</button>
     </div>
   </form>

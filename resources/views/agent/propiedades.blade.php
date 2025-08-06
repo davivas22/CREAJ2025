@@ -5,7 +5,7 @@
 
 
 
-<!-- Tailwind version del dashboard (estructura completa incluyendo vista GRID tipo cards) -->
+
 <div class="flex flex-col h-full w-full bg-white text-gray-800 p-6">
   <!-- Header -->
   <div class="flex items-center justify-between mb-6">
@@ -18,7 +18,7 @@
     </div>
   </div>
 
-  <!-- Acciones y filtros -->
+  
   <div class="flex flex-wrap items-center justify-between gap-4 mb-6">
     <input type="text" placeholder="Search..." class="bg-white border border-gray-300 text-gray-800 text-sm px-4 py-1.5 rounded focus:outline-none focus:ring-2 focus:ring-black w-full max-w-xs" />
     <div class="flex items-center gap-2">
@@ -29,7 +29,7 @@
             <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/>
           </svg>
         </button>
-        <!-- Menú desplegable (oculto por defecto, control con JS) -->
+       
         <div class="filter-menu absolute right-0 mt-2 bg-white text-gray-800 p-4 rounded shadow-lg w-56 hidden z-10 border border-gray-200">
           <label class="block text-sm mb-1">Category</label>
           <select class="bg-white text-sm w-full mb-4 p-2 rounded border border-gray-300">

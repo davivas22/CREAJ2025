@@ -104,12 +104,12 @@
                                 </div>
                                 <div class="ml-4">
                                     <h3 class="text-sm font-medium text-gray-400">Ingresos</h3>
-                                    <p class="text-2xl font-bold text-gray-900">$2.4M</p>
+                                    <p class="text-2xl font-bold text-gray-900">$0</p>
                                 </div>
                             </div>
                             <span class="text-green-500 text-sm font-medium flex items-center">
                                 <i class="fas fa-arrow-up mr-1"></i>
-                                32%
+                                
                             </span>
                         </div>
                         <div class="h-2 bg-gray-100 rounded-full overflow-hidden">
@@ -170,7 +170,7 @@
                                 </div>
                                 <div class="ml-4">
                                     <h3 class="text-sm font-medium text-gray-400">Conversión</h3>
-                                    <p class="text-2xl font-bold text-gray-900">24.8%</p>
+                                    <p class="text-2xl font-bold text-gray-900"></p>
                                 </div>
                             </div>
                             <span class="text-red-500 text-sm font-medium flex items-center">

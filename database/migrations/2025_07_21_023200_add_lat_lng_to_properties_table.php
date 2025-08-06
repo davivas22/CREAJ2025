@@ -11,11 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('solicituds', function (Blueprint $table) {
-           if (!Schema::hasColumn('solicituds', 'visto')) {
-                $table->boolean('visto')->default(0);
-            }
-
+        Schema::table('properties', function (Blueprint $table) {
+           $table->decimal('lat',10,8)->nullable();
+           $table->decimal('lng',11,8)->nullable();
         });
     }
 
@@ -24,8 +22,9 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('solicituds', function (Blueprint $table) {
-            //
+        Schema::table('properties', function (Blueprint $table) {
+            $table->decimal('lat',10,8)->nullable();
+            $table->decimal('lng',11,8)->nullable();
         });
     }
 };

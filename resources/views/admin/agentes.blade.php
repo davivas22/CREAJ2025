@@ -1,34 +1,34 @@
 @extends('layout.sidebaradmin')
 
 @section('content')
-<div class="bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-white h-screen flex overflow-hidden text-sm">
+<div class="bg-neutral-100 dark:bg-gray-900 text-gray-800 dark:text-white h-screen flex overflow-hidden text-sm">
   <div class="flex-grow overflow-hidden h-full flex flex-col">
+
     <!-- Header -->
-    <div class="h-16 w-full border-b border-gray-200 dark:border-gray-800 hidden lg:flex px-10"></div>
+    <div class="h-16 w-full border-b border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-800 hidden lg:flex px-10 shadow-sm"></div>
 
     <div class="flex-grow flex overflow-x-hidden">
 
-      <!-- Panel de información (IZQUIERDA AHORA) -->
-      <div class="flex-grow overflow-y-auto p-8">
+      <!-- Panel de información (IZQUIERDA) -->
+      <div class="flex-grow overflow-y-auto p-8 bg-white dark:bg-gray-800 rounded-lg shadow-inner">
         <div id="detalle-agente" class="hidden max-w-5xl mx-auto space-y-6">
-          
+
           <!-- Encabezado -->
-          <div class="flex items-center justify-between border-b pb-4 mb-4">
+          <div class="flex items-center justify-between pb-4 mb-4 border-b border-gray-200 dark:border-gray-700">
             <div class="flex items-center gap-4">
-              <img id="foto-agente" src="" class="w-16 h-16 rounded-full object-cover border-2 border-dorado" alt="Foto">
+              <img id="foto-agente" src="" class="w-16 h-16 rounded-full object-cover ring-2 ring-neutral-300 dark:ring-neutral-600" alt="Foto">
               <div>
-                <h2 id="nombre-agente" class="text-lg font-bold"></h2>
+                <h2 id="nombre-agente" class="text-lg font-semibold text-neutral-800 dark:text-white"></h2>
               </div>
             </div>
 
-            <!-- Formulario + Botón Eliminar -->
             <form id="form-eliminar-agente" method="POST" class="inline" action="">
               @csrf
               @method('DELETE')
               <button
                 id="eliminar-agente-btn"
                 type="submit"
-                class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg text-sm font-semibold transition"
+                class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg text-sm font-semibold transition"
               >
                 Eliminar
               </button>
@@ -36,17 +36,17 @@
           </div>
 
           <!-- Tabs -->
-          <div class="flex gap-6 border-b mb-4 text-sm font-medium text-gray-600 dark:text-gray-300">
-            <button class="tab-link border-b-2 border-transparent pb-2 hover:text-black dark:hover:text-white active-tab" data-tab="propiedades">Propiedades</button>
-            <button class="tab-link border-b-2 border-transparent pb-2 hover:text-black dark:hover:text-white" data-tab="info">Información</button>
+          <div class="flex gap-6 border-b border-gray-200 dark:border-gray-700 mb-4 text-sm font-medium">
+            <button class="tab-link pb-2 text-neutral-600 dark:text-gray-300 hover:text-black dark:hover:text-white active-tab border-b-2 border-neutral-800 dark:border-white">Propiedades</button>
+            <button class="tab-link pb-2 text-neutral-600 dark:text-gray-300 hover:text-black dark:hover:text-white border-b-2 border-transparent">Información</button>
           </div>
 
           <!-- Tab: Propiedades -->
           <div class="tab-content" id="tab-propiedades">
-            <div class="overflow-x-auto">
-              <table class="min-w-full text-sm border-t">
-                <thead>
-                  <tr class="text-left text-gray-500 border-b">
+            <div class="overflow-x-auto rounded-lg shadow-sm ring-1 ring-gray-200 dark:ring-gray-700">
+              <table class="min-w-full text-sm bg-white dark:bg-gray-800 rounded-md">
+                <thead class="bg-neutral-50 dark:bg-gray-700">
+                  <tr class="text-left text-gray-500 dark:text-gray-300">
                     <th class="py-2 px-3">Título</th>
                     <th class="py-2 px-3">Imagen</th>
                     <th class="py-2 px-3">Zona</th>
@@ -68,26 +68,25 @@
               <div><p class="font-semibold">Experiencia</p><p id="experiencia-agente"></p></div>
               <div><p class="font-semibold">Licencia</p><p id="licencia-agente"></p></div>
               <div class="md:col-span-2"><p class="font-semibold">Descripción</p><p id="descripcion-agente"></p></div>
-              <p id="zona-agente" class="text-sm text-black dark:text-gray-300 font-bold"></p>
-              <p id="email-agente" class="text-sm text-black dark:text-gray-400 font-bold"></p>
+              <p id="zona-agente" class="text-sm font-bold"></p>
+              <p id="email-agente" class="text-sm font-bold"></p>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- Lista de agentes (DERECHA AHORA) -->
-      <div class="xl:w-72 w-64 flex-shrink-0 border-l border-gray-200 dark:border-gray-800 h-full overflow-y-auto p-5 bg-white dark:bg-gray-900">
-        <!-- Buscador -->
+      <!-- Lista de agentes (DERECHA) -->
+      <div class="xl:w-72 w-64 flex-shrink-0 border-l border-gray-400 dark:border-gray-800 h-full overflow-y-auto p-5 bg-neutral-50 dark:bg-gray-900 shadow-sm">
         <div class="mb-4">
           <input
             type="text"
             placeholder="Buscar agente..."
             id="buscador-agentes"
-            class="w-full px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-700 dark:bg-gray-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-dorado"
+            class="w-full px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-800 dark:bg-gray-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-neutral-400"
           />
         </div>
 
-        <div class="text-xs text-gray-400 tracking-wider mb-2">USERS</div>
+        <div class="text-xs text-neutral-500 tracking-wider mb-2">AGENTES</div>
         <div id="lista-agentes">
           @foreach ($agentes as $agente)
           @php
@@ -98,13 +97,13 @@
                 'zona' => $p->zona ?? 'No definida',
                 'estado' => $p->estado ?? 'Disponible',
                 'precio' => $p->precio ?? '0.00',
-                'url' => route('agente.editar.propiedad', $p->id),
+                'url' => route('admin.editar.propiedades', $p->id),
                 'imagen' => asset($imagen),
               ];
             })->toJson();
           @endphp
           <button
-            class="agente-btn mt-2 flex items-center w-full gap-2 p-2 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-800 transition"
+            class="agente-btn mt-2 flex items-center w-full gap-2 p-2 rounded-lg hover:bg-neutral-400 dark:hover:bg-gray-800 transition"
             data-id="{{ $agente->id }}"
             data-nombre="{{ $agente->name }}"
             data-email="{{ $agente->email }}"
@@ -120,7 +119,7 @@
             <img src="{{ asset($agente->foto_perfil) }}" class="w-9 h-9 rounded-full object-cover">
             <div class="flex flex-col text-left">
               <span class="text-sm font-medium truncate">{{ $agente->name }}</span>
-              <span class="text-xs text-gray-500">{{ $agente->zona }}</span>
+              <span class="text-xs text-neutral-500">{{ $agente->zona }}</span>
             </div>
           </button>
           @endforeach
@@ -130,6 +129,7 @@
     </div>
   </div>
 </div>
+
 
 <!-- Script funcional -->
 <script>

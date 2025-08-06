@@ -12,7 +12,6 @@
         @endif
       <form action="{{route('agente.crear.store')}}" method="POST" enctype="multipart/form-data" class="space-y-8">
         @csrf
-        <!-- Sección: Datos generales -->
          <!-- Sección: Datos generales -->
   <div class="space-y-6">
     <div>
@@ -93,14 +92,36 @@
   </div>
 
   <!-- Sección: Ubicación -->
-  <div class="space-y-6">
-    <h3 class="text-lg font-semibold text-gray-700 border-b border-gray-200 pb-2">Ubicación</h3>
-    <div>
-      <label for="ubicacion" class="block text-sm font-medium text-gray-700">Dirección / Colonia / Zona</label>
-      <input type="text" id="ubicacion" name="ubicacion" value="{{ old('ubicacion') }}" required class="mt-1 block w-full rounded-md border border-gray-300 shadow-sm focus:ring-dorado focus:border-dorado">
-      @error('ubicacion')<p class="text-sm text-red-600 mt-1">{{ $message }}</p>@enderror
-    </div>
+<div class="space-y-6">
+  <h3 class="text-lg font-semibold text-gray-700 border-b border-gray-200 pb-2">Ubicación</h3>
+
+  <!-- Dirección textual -->
+  <div>
+    <label for="ubicacion" class="block text-sm font-medium text-gray-700">Dirección / Colonia / Zona</label>
+    <input type="text" id="ubicacion" name="ubicacion" value="{{ old('ubicacion') }}" required class="mt-1 block w-full rounded-md border border-gray-300 shadow-sm focus:ring-dorado focus:border-dorado">
+    @error('ubicacion')<p class="text-sm text-red-600 mt-1">{{ $message }}</p>@enderror
   </div>
+
+  <!-- Campos ocultos de lat/lng -->
+  <input type="hidden" id="lat" name="lat" >
+<input type="hidden" id="lng" name="lng" >
+
+
+  <!-- Mapa y búsqueda -->
+  <div>
+    <label class="block text-sm font-medium text-gray-700 mb-2">Selecciona la ubicación en el mapa</label>
+   <div id="map" class="w-full h-[500px] rounded-xl shadow-md"></div>
+
+
+  </div>
+</div>
+
+
+  
+
+
+    
+
 
   <!-- Sección: Imagen principal -->
   <div class="space-y-6">
@@ -119,5 +140,45 @@
       </form>
     </div>
   </div>
+
+ 
+
+ <script>
+        function initMap() {
+            const map = new google.maps.Map(document.getElementById("map"), {
+                center: { lat: 13.6929, lng: -89.2182 },  // Coordenadas iniciales
+                zoom: 9,  // Nivel de zoom
+            });
+
+            let marker;
+
+            // Añadir evento de clic en el mapa
+            map.addListener("click", function(event) {
+                // Si ya hay un marcador, lo eliminamos
+                if (marker) {
+                    marker.setMap(null);
+                }
+
+                // Crear un nuevo marcador en las coordenadas del clic
+                marker = new google.maps.Marker({
+                    position: event.latLng,
+                    map: map,
+                    title: "Marcador en el clic",
+                });
+
+                // Obtener las coordenadas del clic (latitud y longitud)
+                const lat = event.latLng.lat();
+                const lng = event.latLng.lng();
+
+                // Asignar las coordenadas a los campos ocultos
+                document.getElementById("lat").value = lat;
+                document.getElementById("lng").value = lng;
+            });
+        }
+    </script>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC6rLn1Fnx9hlBPRk7zVQUssjIvJGqQuYE&callback=initMap" async defer></script>
+
+
 
 @endsection

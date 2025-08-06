@@ -19,6 +19,8 @@ class Propertie extends Model
         'area_terreno',
         'area_construccion',
         'ubicacion',
+        'lat',
+        'lng'
         
     ];
 

@@ -63,6 +63,15 @@
             <button type="submit" class="w-full py-2 bg-black text-white rounded-lg hover:bg-[#BA9D79] hover:text-black transition">
                 Ingresar
             </button>
+            <div>
+                <a href="{{url('/auth/google')}}">
+                    <button type="button"
+                    class="w-full flex items-center justify-center gap-3 bg-white text-gray-800 border border-gray-300 rounded-xl shadow-sm py-3 px-6 font-medium hover:bg-gray-100 transition-all duration-300 ease-in-out">
+                    <img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google Logo" class="w-5 h-5">
+                    Iniciar Sesión con Google
+                    </button>
+                </a>
+            </div>
                         <div class="text-center mt-4 text-sm">
                             <span class="text-black">¿No tienes cuenta?</span>
                             <a href="{{ route('register') }}" class="text-[#BA9D79] hover:underline">Regístrate</a>
