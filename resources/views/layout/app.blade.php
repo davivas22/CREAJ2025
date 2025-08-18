@@ -117,9 +117,9 @@
                 <!-- Menú de navegación -->
                 <nav class="hidden md:flex space-x-8">
                     <a href="{{route('home')}}" class="text-black font-medium relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-[#BA9D79] hover:after:w-full after:transition-all after:duration-300">Home</a>
-                    <a href="#" class="text-black font-medium  hover:text-[#BA9D79] relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-[#BA9D79] hover:after:w-full after:transition-all after:duration-300">Acerca de</a>
+                    <a href="/about" class="text-black font-medium  hover:text-[#BA9D79] relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-[#BA9D79] hover:after:w-full after:transition-all after:duration-300">Acerca de</a>
                     <a href="{{route('page.propiedades')}}" class="text-black font-medium  hover:text-[#BA9D79] relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-[#BA9D79] hover:after:w-full after:transition-all after:duration-300">Propiedades</a>
-                    <a href="#" class="text-black font-medium  hover:text-[#BA9D79] relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-[#BA9D79] hover:after:w-full after:transition-all after:duration-300">Contacto</a>
+                    <a href="{{route('contacto')}}" class="text-black font-medium  hover:text-[#BA9D79] relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-[#BA9D79] hover:after:w-full after:transition-all after:duration-300">Contacto</a>
                 </nav>
                 @guest
                         <!-- Botón de inicio de sesión -->
@@ -141,7 +141,7 @@
                     <!-- Menú desplegable -->
                     <div id="dropdownMenu" class="origin-top-right absolute right-0 mt-2 w-48 rounded-lg shadow-lg bg-white ring-1 ring-black ring-opacity-5 hidden z-50">
                         <div class="py-1 text-sm text-gray-800">
-                            <a href="{{route('page.perfil',auth()->user()->id)}}" class="block px-4 py-2 hover:bg-[#BA9D79] hover:text-white transition">Perfil</a>
+                            <a href="{{route('page.perfil', auth()->user()->id)}}" class="block px-4 py-2 hover:bg-[#BA9D79] hover:text-white transition">Perfil</a>
                             <a href="#" onclick="document.getElementById('logout-form').submit()" class="block px-4 py-2 hover:bg-[#BA9D79] hover:text-white transition">Cerrar sesión</a>
                              <a href="{{route('page.solicitud')}}" class="block px-4 py-2 hover:bg-[#BA9D79] hover:text-white transition">Convertirse en agente</a>
                         </div>

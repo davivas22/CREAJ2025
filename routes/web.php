@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\admin\AdminPerfil;
+use App\Http\Controllers\admin\AdminPerfilController;
 use App\Http\Controllers\admin\AgenteController;
 use App\Http\Controllers\admin\DashboardController;
 use App\Http\Controllers\admin\PropiedadController;
@@ -11,6 +13,10 @@ use App\Http\Controllers\agent\DashboarAgentController;
 use App\Http\Controllers\agent\PerfilController;
 use App\Http\Controllers\agent\PropiedadesAgentController;
 use App\Http\Controllers\agent\VerPropiedadController;
+use App\Http\Controllers\page\AboutController;
+use App\Http\Controllers\page\ContactoController;
+use App\Http\Controllers\page\MorePropiedadController;
+use App\Http\Controllers\page\PagePerfilController;
 use App\Http\Controllers\page\PaginaPerfilController;
 use App\Http\Controllers\page\PropiedadesController;
 use App\Http\Controllers\page\SolicitudController;
@@ -24,26 +30,22 @@ Route::get('/', function () {
     return view('welcome');
 })->name('home');
 
-// 🔒 Dashboard de usuario general
-Route::get('/user/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('user.dashboard');
 
-// 🔐 Rutas protegidas para usuario autenticado
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
 
-// 🌐 Página pública y rutas autenticadas
-Route::get('/perfil/{user}', [PaginaPerfilController::class, 'index'])->name('page.perfil')->middleware('auth');
-Route::put('/perfil/{user}', [PaginaPerfilController::class, 'update'])->name('page.perfil.store');
+
+// pagina
+Route::get('/about',[AboutController::class,'index'])->name('about');
+Route::get('/contacto',[ContactoController::class,'index'])->name('contacto');
+
+Route::get('/perfil/{user}', [PagePerfilController::class, 'index'])->name('page.perfil')->middleware('auth');
+Route::put('/perfil/{user}', [PagePerfilController::class, 'update'])->name('page.perfil.store');
 Route::get('/propiedades', [PropiedadesController::class, 'index'])->name('page.propiedades');
 Route::get('/quiero-ser-agente', [SolicitudController::class, 'index'])->name('page.solicitud')->middleware('auth', 'verified');
 Route::post('/quiero-ser-agente', [SolicitudController::class, 'store'])->name('solicitud.store');
+Route::get('/propiedad/{propiedad}/', [MorePropiedadController::class,'index'])->name('page.mas');
 
-// 👨‍💼 Admin
+//  Admin
+
 Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
     Route::get('/admin/propiedades', [PropiedadController::class, 'index'])->name('admin.propiedades');
@@ -54,9 +56,10 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::post('/admin/solicitudes/{solicitud}/aceptar', [SolicitudAgenteController::class, 'aceptar'])->name('admin.solicitudes.aceptar');
     Route::post('/admin/solicitudes/{solicitud}/rechazar', [SolicitudAgenteController::class, 'rechazar'])->name('admin.solicitudes.rechazar');
     Route::get('/admin/ver-solicitud/{solicitud}', [VerSolicitudController::class, 'show'])->name('Admin.verSolicitud');
+   Route::get('/admin/perfil',[AdminPerfilController::class,'index'])->name('admin.configuracion');
 });
 
-// 🏠 Agente
+//  Agente
 Route::middleware(['auth', 'role:agente'])->group(function () {
     Route::get('/agente/dashboard', [DashboarAgentController::class, 'index'])->name('agente.index');
     Route::get('/agente/crear', [CrearController::class, 'index'])->name('agente.crear');

@@ -3,7 +3,17 @@
 @section('content')
  
 <div class="container mx-auto px-4 py-6">
-    <h1 class="text-3xl font-bold mb-8">Solicitudes Recibidas</h1>
+    
+    @if($solicitud->isEmpty())
+    <div class="flex items-center justify-center h-96">
+        <p class="text-lg text-gray-600">No hay solicitudes</p>
+    </div>
+    @else
+  <h1 class="text-3xl font-bold mb-8">Solicitudes Recibidas</h1>
+
+    @endif
+
+
      @if (session('success'))
         <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4">
             {{ session('success') }}

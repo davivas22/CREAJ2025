@@ -8,128 +8,228 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Estilos para el Sidebar */
+        .sidebar {
+            width: 260px; /* Ancho fijo del sidebar */
+            height: 100%;
+            background-color: white;
+            position: fixed;
+            top: 0;
+            left: 0;
+            box-shadow: 4px 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .sidebar a {
+            display: block;
+            padding: 16px;
+            color: black; /* Cambiar el color del texto a negro */
+            text-decoration: none;
+            transition: background-color 0.3s ease, padding-left 0.3s ease;
+        }
+
+        /* Mejorar el resaltado */
+        .sidebar a:hover, .sidebar a.active {
+            background-color: #BA9D79; /* Fondo resaltado */
+            color: white; /* Texto blanco cuando se resalta */
+            padding-left: 24px; /* Desplazar el texto a la izquierda para hacerlo más atractivo */
+            border-radius: 12px; /* Bordes redondeados */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra suave para el efecto visual */
+        }
+
+        /* Estilos para el contenido principal */
+        .main-content {
+            margin-left: 260px; /* Deja espacio para el sidebar */
+            transition: margin-left 0.3s ease;
+        }
+    </style>
 </head>
 <body class="bg-gray-50">
+
     <div class="flex h-screen overflow-hidden">
         <!-- Sidebar (Desktop) -->
-     <aside class="hidden md:flex md:flex-col w-72 bg-white text-[#BA9D79] border-r border-gray-200">
-    <div class="p-6 border-b border-gray-300">
-        <h2 class="text-2xl font-bold flex items-center text-[#BA9D79]">
-            <i class="fas fa-estate mr-3 text-black"></i>
-            Panel ENCASA
-        </h2>
+        <aside id="sidebar" class="sidebar w-72 h-screen bg-white border-r border-neutral-200/70 shadow-sm flex flex-col">
+  <!-- Header -->
+  <div class="px-5 py-5 border-b border-neutral-200/70">
+    <h2 class="text-xl font-bold tracking-tight flex items-center gap-3 text-neutral-900">
+      <i class="fas fa-estate text-[22px] text-neutral-900"></i>
+      <span>Panel <span class="text-[#BA9D79]">ENCASA</span></span>
+    </h2>
+  </div>
+
+  <!-- Nav -->
+  <nav class="flex-1 overflow-y-auto px-3 py-5 scrollbar-thin scrollbar-thumb-neutral-300/80 scrollbar-track-transparent">
+    {{-- Grupo: Principal --}}
+    <div class="mb-7">
+      <h3 class="px-3 text-[11px] font-semibold text-neutral-500 uppercase tracking-[0.12em]">Principal</h3>
+      <ul class="mt-3 space-y-1.5">
+        <li>
+          <a href="{{ route('admin.dashboard') }}"
+             class="group relative flex items-center gap-3 px-3 py-2.5 rounded-xl transition
+                    {{ request()->routeIs('admin.dashboard')
+                        ? 'bg-[#BA9D79]/10 text-neutral-900 ring-1 ring-[#BA9D79]/30'
+                        : 'text-neutral-700 hover:bg-neutral-100' }}">
+            <i class="fas fa-chart-line text-[18px] {{ request()->routeIs('admin.dashboard') ? 'text-[#BA9D79]' : 'text-neutral-900/80 group-hover:text-neutral-900' }}"></i>
+            <span class="text-sm font-medium">Dashboard</span>
+            @if(request()->routeIs('admin.dashboard'))
+              <span class="absolute inset-y-0 left-0 w-1 rounded-r-xl bg-[#BA9D79]"></span>
+            @endif
+          </a>
+        </li>
+
+        <li>
+          <a href="{{ route('admin.propiedades') }}"
+             class="group relative flex items-center gap-3 px-3 py-2.5 rounded-xl transition
+                    {{ request()->routeIs('admin.propiedades')
+                        ? 'bg-[#BA9D79]/10 text-neutral-900 ring-1 ring-[#BA9D79]/30'
+                        : 'text-neutral-700 hover:bg-neutral-100' }}">
+            <i class="fas fa-building text-[18px] {{ request()->routeIs('admin.propiedades') ? 'text-[#BA9D79]' : 'text-neutral-900/80 group-hover:text-neutral-900' }}"></i>
+            <span class="text-sm font-medium">Propiedades</span>
+            @if(request()->routeIs('admin.propiedades'))
+              <span class="absolute inset-y-0 left-0 w-1 rounded-r-xl bg-[#BA9D79]"></span>
+            @endif
+          </a>
+        </li>
+      </ul>
     </div>
 
-    <nav class="flex-1 overflow-y-auto px-4 py-6">
-        <div class="mb-6">
-            <h3 class="px-4 text-xs font-semibold text-gray-500 uppercase tracking-wider">Principal</h3>
-            <ul class="mt-4 space-y-2">
-                <li>
-                    <a href="{{route('admin.dashboard')}}" class="flex items-center px-4 py-3 bg-black text-[#BA9D79] rounded-lg font-semibold">
-                        <i class="fas fa-chart-line mr-3 text-[#BA9D79]"></i>
-                        <span>Dashboard</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{route('admin.propiedades')}}" class="flex items-center px-4 py-3 text-black hover:bg-gray-200 rounded-lg transition">
-                        <i class="fas fa-building mr-3 text-black"></i>
-                        <span>Propiedades</span>
-                    </a>
-                </li>
-            </ul>
-        </div>
+    {{-- Grupo: Gestión --}}
+    <div class="mb-7">
+      <h3 class="px-3 text-[11px] font-semibold text-neutral-500 uppercase tracking-[0.12em]">Gestión</h3>
+      <ul class="mt-3 space-y-1.5">
+        <li>
+          <a href="{{ route('admin.agentes') }}"
+             class="group relative flex items-center gap-3 px-3 py-2.5 rounded-xl transition
+                    {{ request()->routeIs('admin.agentes')
+                        ? 'bg-[#BA9D79]/10 text-neutral-900 ring-1 ring-[#BA9D79]/30'
+                        : 'text-neutral-700 hover:bg-neutral-100' }}">
+            <i class="fas fa-users text-[18px] {{ request()->routeIs('admin.agentes') ? 'text-[#BA9D79]' : 'text-neutral-900/80 group-hover:text-neutral-900' }}"></i>
+            <span class="text-sm font-medium">Agentes</span>
+            @if(request()->routeIs('admin.agentes'))
+              <span class="absolute inset-y-0 left-0 w-1 rounded-r-xl bg-[#BA9D79]"></span>
+            @endif
+          </a>
+        </li>
 
-        <div class="mb-6">
-            <h3 class="px-4 text-xs font-semibold text-gray-500 uppercase tracking-wider">Gestión</h3>
-            <ul class="mt-4 space-y-2">
-                <li>
-                    <a href="{{route('admin.agentes')}}" class="flex items-center px-4 py-3 text-black hover:bg-gray-200 rounded-lg transition">
-                        <i class="fas fa-users mr-3 text-black"></i>
-                        <span>Agentes</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="clientes.html" class="flex items-center px-4 py-3 text-black hover:bg-gray-200 rounded-lg transition">
-                        <i class="fas fa-user-tie mr-3 text-black"></i>
-                        <span>Clientes</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="citas.html" class="flex items-center px-4 py-3 text-black hover:bg-gray-200 rounded-lg transition">
-                        <i class="fas fa-calendar-alt mr-3 text-black"></i>
-                        <span>Citas</span>
-                    </a>
-                </li>
-            </ul>
-        </div>
+        <li>
+          <a href="{{ route('admin.solicitud.agente') }}"
+             class="group relative flex items-center gap-3 px-3 py-2.5 rounded-xl transition
+                    {{ request()->routeIs('admin.solicitud.agente')
+                        ? 'bg-[#BA9D79]/10 text-neutral-900 ring-1 ring-[#BA9D79]/30'
+                        : 'text-neutral-700 hover:bg-neutral-100' }}">
+            <i class="fas fa-user-tie text-[18px] {{ request()->routeIs('admin.solicitud.agente') ? 'text-[#BA9D79]' : 'text-neutral-900/80 group-hover:text-neutral-900' }}"></i>
+            <span class="text-sm font-medium">Solicitudes</span>
+            @if(request()->routeIs('admin.solicitud.agente'))
+              <span class="absolute inset-y-0 left-0 w-1 rounded-r-xl bg-[#BA9D79]"></span>
+            @endif
+          </a>
+        </li>
 
-        <div class="mb-6">
-            <h3 class="px-4 text-xs font-semibold text-gray-500 uppercase tracking-wider">Análisis</h3>
-            <ul class="mt-4 space-y-2">
-                <li>
-                    <a href="reportes.html" class="flex items-center px-4 py-3 text-black hover:bg-gray-200 rounded-lg transition">
-                        <i class="fas fa-chart-bar mr-3 text-black"></i>
-                        <span>Reportes</span>
-                    </a>
-                </li>
-            </ul>
-        </div>
-
-        <div class="mb-6">
-            <h3 class="px-4 text-xs font-semibold text-gray-500 uppercase tracking-wider">Sistema</h3>
-            <ul class="mt-4 space-y-2">
-                <li>
-                    <a href="configuracion.html" class="flex items-center px-4 py-3 text-black hover:bg-gray-200 rounded-lg transition">
-                        <i class="fas fa-cog mr-3 text-black"></i>
-                        <span>Configuración</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="usuarios.html" class="flex items-center px-4 py-3 text-black hover:bg-gray-200 rounded-lg transition">
-                        <i class="fas fa-users-cog mr-3 text-black"></i>
-                        <span>Usuarios</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="roles.html" class="flex items-center px-4 py-3 text-black hover:bg-gray-200 rounded-lg transition">
-                        <i class="fas fa-user-shield mr-3 text-black"></i>
-                        <span>Roles</span>
-                    </a>
-                </li>
-            </ul>
-        </div>
-    </nav>
-
-    <div class="p-4 border-t border-gray-300">
-        <a href="perfil.html" class="flex items-center space-x-4">
-            <div class="relative">
-                <img src="https://ui-avatars.com/api/?name=Admin+User&background=BA9D79&color=000000" class="w-10 h-10 rounded-lg">
-                <span class="absolute bottom-0 right-0 w-3 h-3 bg-green-500 border-2 border-white rounded-full"></span>
-            </div>
-            <div class="flex-1 min-w-0">
-                <p class="text-sm font-medium text-black truncate">{{auth()->user()->name}} {{auth()->user()->lastname}}</p>
-                <p class="text-xs text-gray-500 truncate">{{auth()->user()->email}}</p>
-            </div>
-            <div class="inline-flex items-center justify-center p-2 text-gray-600 hover:text-black hover:bg-gray-200 rounded-lg transition">
-                <i class="fas fa-cog"></i>
-            </div>
-        </a>
+        <li>
+          <a href=""
+             class="group relative flex items-center gap-3 px-3 py-2.5 rounded-xl transition
+                    {{ request()->routeIs('admin.citas')
+                        ? 'bg-[#BA9D79]/10 text-neutral-900 ring-1 ring-[#BA9D79]/30'
+                        : 'text-neutral-700 hover:bg-neutral-100' }}">
+            <i class="fas fa-calendar-alt text-[18px] {{ request()->routeIs('admin.citas') ? 'text-[#BA9D79]' : 'text-neutral-900/80 group-hover:text-neutral-900' }}"></i>
+            <span class="text-sm font-medium">Citas</span>
+            @if(request()->routeIs('admin.citas'))
+              <span class="absolute inset-y-0 left-0 w-1 rounded-r-xl bg-[#BA9D79]"></span>
+            @endif
+          </a>
+        </li>
+      </ul>
     </div>
+
+    {{-- Grupo: Análisis --}}
+    <div class="mb-7">
+      <h3 class="px-3 text-[11px] font-semibold text-neutral-500 uppercase tracking-[0.12em]">Análisis</h3>
+      <ul class="mt-3 space-y-1.5">
+        <li>
+          <a href=""
+             class="group relative flex items-center gap-3 px-3 py-2.5 rounded-xl transition
+                    {{ request()->routeIs('admin.reportes')
+                        ? 'bg-[#BA9D79]/10 text-neutral-900 ring-1 ring-[#BA9D79]/30'
+                        : 'text-neutral-700 hover:bg-neutral-100' }}">
+            <i class="fas fa-chart-bar text-[18px] {{ request()->routeIs('admin.reportes') ? 'text-[#BA9D79]' : 'text-neutral-900/80 group-hover:text-neutral-900' }}"></i>
+            <span class="text-sm font-medium">Reportes</span>
+            @if(request()->routeIs('admin.reportes'))
+              <span class="absolute inset-y-0 left-0 w-1 rounded-r-xl bg-[#BA9D79]"></span>
+            @endif
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    {{-- Grupo: Sistema --}}
+    <div class="mb-2">
+      <h3 class="px-3 text-[11px] font-semibold text-neutral-500 uppercase tracking-[0.12em]">Sistema</h3>
+      <ul class="mt-3 space-y-1.5">
+        <li>
+          <a href=""
+             class="group relative flex items-center gap-3 px-3 py-2.5 rounded-xl transition
+                    {{ request()->routeIs('admin.config')
+                        ? 'bg-[#BA9D79]/10 text-neutral-900 ring-1 ring-[#BA9D79]/30'
+                        : 'text-neutral-700 hover:bg-neutral-100' }}">
+            <i class="fas fa-cog text-[18px] {{ request()->routeIs('admin.config') ? 'text-[#BA9D79]' : 'text-neutral-900/80 group-hover:text-neutral-900' }}"></i>
+            <span class="text-sm font-medium">Configuración</span>
+            @if(request()->routeIs('admin.config'))
+              <span class="absolute inset-y-0 left-0 w-1 rounded-r-xl bg-[#BA9D79]"></span>
+            @endif
+          </a>
+        </li>
+
+        <li>
+          <a href=""
+             class="group relative flex items-center gap-3 px-3 py-2.5 rounded-xl transition
+                    {{ request()->routeIs('admin.usuarios')
+                        ? 'bg-[#BA9D79]/10 text-neutral-900 ring-1 ring-[#BA9D79]/30'
+                        : 'text-neutral-700 hover:bg-neutral-100' }}">
+            <i class="fas fa-users-cog text-[18px] {{ request()->routeIs('admin.usuarios') ? 'text-[#BA9D79]' : 'text-neutral-900/80 group-hover:text-neutral-900' }}"></i>
+            <span class="text-sm font-medium">Usuarios</span>
+            @if(request()->routeIs('admin.usuarios'))
+              <span class="absolute inset-y-0 left-0 w-1 rounded-r-xl bg-[#BA9D79]"></span>
+            @endif
+          </a>
+        </li>
+
+        <li>
+          <a href=""
+             class="group relative flex items-center gap-3 px-3 py-2.5 rounded-xl transition
+                    {{ request()->routeIs('admin.roles')
+                        ? 'bg-[#BA9D79]/10 text-neutral-900 ring-1 ring-[#BA9D79]/30'
+                        : 'text-neutral-700 hover:bg-neutral-100' }}">
+            <i class="fas fa-user-shield text-[18px] {{ request()->routeIs('admin.roles') ? 'text-[#BA9D79]' : 'text-neutral-900/80 group-hover:text-neutral-900' }}"></i>
+            <span class="text-sm font-medium">Roles</span>
+            @if(request()->routeIs('admin.roles'))
+              <span class="absolute inset-y-0 left-0 w-1 rounded-r-xl bg-[#BA9D79]"></span>
+            @endif
+          </a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Footer / Perfil -->
+  <div class="p-4 border-t border-neutral-200/70">
+    <a href="" class="flex items-center gap-3 group">
+      <div class="relative">
+        <img src="{{ auth()->user()->foto_perfil ? asset(auth()->user()->foto_perfil) : 'https://ui-avatars.com/api/?name='.urlencode(auth()->user()->name.' '.auth()->user()->lastname).'&background=BA9D79&color=000000' }}"
+             class="w-11 h-11 rounded-xl object-cover ring-1 ring-neutral-200" alt="Perfil">
+        <span class="absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-emerald-500 border-2 border-white rounded-full"></span>
+      </div>
+     
+     
+    </a>
+  </div>
 </aside>
 
-        <!-- Mobile Sidebar -->
-        <div x-data="{ open: false }" class="fixed inset-0 z-40 md:hidden" :class="{ 'hidden': !open }" id="mobileSidebar">
-            <div class="absolute inset-0 bg-gray-600 opacity-75" @click="open = false"></div>
-            
-            <div class="relative flex-1 flex flex-col w-full max-w-xs bg-gradient-to-b from-blue-800 to-blue-900 text-white transform transition-transform duration-300 ease-in-out">
-                <!-- Copiar el contenido del sidebar desktop aquí -->
-            </div>
-        </div>
 
-{{-- CONTENIDO DE CADA PÁGINA --}}
-    <main class="flex-1 p-6 overflow-auto">
-        @yield('content')
-    </main>
+        <!-- Contenido -->
+        <main id="mainContent" class="flex-1 p-6 overflow-auto ml-[260px]">
+            @yield('content')
+        </main>
+    </div>
 
 </body>
 </html>
