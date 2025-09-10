@@ -125,19 +125,7 @@
           </a>
         </li>
 
-        <li>
-          <a href=""
-             class="group relative flex items-center gap-3 px-3 py-2.5 rounded-xl transition
-                    {{ request()->routeIs('admin.citas')
-                        ? 'bg-[#BA9D79]/10 text-neutral-900 ring-1 ring-[#BA9D79]/30'
-                        : 'text-neutral-700 hover:bg-neutral-100' }}">
-            <i class="fas fa-calendar-alt text-[18px] {{ request()->routeIs('admin.citas') ? 'text-[#BA9D79]' : 'text-neutral-900/80 group-hover:text-neutral-900' }}"></i>
-            <span class="text-sm font-medium">Citas</span>
-            @if(request()->routeIs('admin.citas'))
-              <span class="absolute inset-y-0 left-0 w-1 rounded-r-xl bg-[#BA9D79]"></span>
-            @endif
-          </a>
-        </li>
+       
       </ul>
     </div>
 
@@ -146,13 +134,13 @@
       <h3 class="px-3 text-[11px] font-semibold text-neutral-500 uppercase tracking-[0.12em]">Análisis</h3>
       <ul class="mt-3 space-y-1.5">
         <li>
-          <a href=""
+          <a href="{{route('admin.mensajes')}}"
              class="group relative flex items-center gap-3 px-3 py-2.5 rounded-xl transition
                     {{ request()->routeIs('admin.reportes')
                         ? 'bg-[#BA9D79]/10 text-neutral-900 ring-1 ring-[#BA9D79]/30'
                         : 'text-neutral-700 hover:bg-neutral-100' }}">
             <i class="fas fa-chart-bar text-[18px] {{ request()->routeIs('admin.reportes') ? 'text-[#BA9D79]' : 'text-neutral-900/80 group-hover:text-neutral-900' }}"></i>
-            <span class="text-sm font-medium">Reportes</span>
+            <span class="text-sm font-medium">Reseñas</span>
             @if(request()->routeIs('admin.reportes'))
               <span class="absolute inset-y-0 left-0 w-1 rounded-r-xl bg-[#BA9D79]"></span>
             @endif
@@ -166,13 +154,13 @@
       <h3 class="px-3 text-[11px] font-semibold text-neutral-500 uppercase tracking-[0.12em]">Sistema</h3>
       <ul class="mt-3 space-y-1.5">
         <li>
-          <a href=""
+          <a href="{{route('admin.configuracion')}}"
              class="group relative flex items-center gap-3 px-3 py-2.5 rounded-xl transition
                     {{ request()->routeIs('admin.config')
                         ? 'bg-[#BA9D79]/10 text-neutral-900 ring-1 ring-[#BA9D79]/30'
                         : 'text-neutral-700 hover:bg-neutral-100' }}">
             <i class="fas fa-cog text-[18px] {{ request()->routeIs('admin.config') ? 'text-[#BA9D79]' : 'text-neutral-900/80 group-hover:text-neutral-900' }}"></i>
-            <span class="text-sm font-medium">Configuración</span>
+            <span class="text-sm font-medium">Perfil</span>
             @if(request()->routeIs('admin.config'))
               <span class="absolute inset-y-0 left-0 w-1 rounded-r-xl bg-[#BA9D79]"></span>
             @endif
@@ -180,7 +168,7 @@
         </li>
 
         <li>
-          <a href=""
+          <a href="{{route('admin.usuarios')}}"
              class="group relative flex items-center gap-3 px-3 py-2.5 rounded-xl transition
                     {{ request()->routeIs('admin.usuarios')
                         ? 'bg-[#BA9D79]/10 text-neutral-900 ring-1 ring-[#BA9D79]/30'
@@ -193,35 +181,49 @@
           </a>
         </li>
 
+        
+
+
         <li>
-          <a href=""
+          <form action="{{route('logout')}}" method="post"
              class="group relative flex items-center gap-3 px-3 py-2.5 rounded-xl transition
                     {{ request()->routeIs('admin.roles')
                         ? 'bg-[#BA9D79]/10 text-neutral-900 ring-1 ring-[#BA9D79]/30'
                         : 'text-neutral-700 hover:bg-neutral-100' }}">
-            <i class="fas fa-user-shield text-[18px] {{ request()->routeIs('admin.roles') ? 'text-[#BA9D79]' : 'text-neutral-900/80 group-hover:text-neutral-900' }}"></i>
-            <span class="text-sm font-medium">Roles</span>
+
+                        @csrf
+           <i class="fas fa-right-from-bracket text-[18px] {{ request()->routeIs('logout') ? 'text-[#BA9D79]' : 'text-neutral-900/80 group-hover:text-neutral-900' }}"></i>
+
+            <button class="text-sm font-medium" type="submit">Cerrar Sesion</button>
             @if(request()->routeIs('admin.roles'))
               <span class="absolute inset-y-0 left-0 w-1 rounded-r-xl bg-[#BA9D79]"></span>
             @endif
-          </a>
+          </form>
         </li>
       </ul>
     </div>
   </nav>
 
   <!-- Footer / Perfil -->
-  <div class="p-4 border-t border-neutral-200/70">
-    <a href="" class="flex items-center gap-3 group">
-      <div class="relative">
-        <img src="{{ auth()->user()->foto_perfil ? asset(auth()->user()->foto_perfil) : 'https://ui-avatars.com/api/?name='.urlencode(auth()->user()->name.' '.auth()->user()->lastname).'&background=BA9D79&color=000000' }}"
-             class="w-11 h-11 rounded-xl object-cover ring-1 ring-neutral-200" alt="Perfil">
-        <span class="absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-emerald-500 border-2 border-white rounded-full"></span>
-      </div>
-     
-     
-    </a>
-  </div>
+  <div class="p-1 border-t border-neutral-200/70 bg-[#09121b]">
+  <a href="{{ route('admin.configuracion') }}" class="flex items-center gap-3 group">
+    <div class="relative">
+      <img src="{{ auth()->user()->foto_perfil 
+                  ? asset(auth()->user()->foto_perfil) 
+                  : 'https://ui-avatars.com/api/?name='.urlencode(auth()->user()->name.' '.auth()->user()->lastname).'&background=BA9D79&color=000000' }}"
+           class="w-11 h-11 rounded-xl object-cover ring-2 ring-[#BA9D79]/70 shadow-sm" 
+           alt="Perfil">
+      <span class="absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-emerald-500 border-2 border-white rounded-full"></span>
+    </div>
+
+    <div>
+      <p class="text-sm font-semibold text-white group-hover:text-[#BA9D79] transition">
+        {{ auth()->user()->name }} {{ auth()->user()->lastname }}
+      </p>
+    </div>
+  </a>
+</div>
+
 </aside>
 
 

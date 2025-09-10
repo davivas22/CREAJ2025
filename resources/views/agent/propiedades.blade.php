@@ -20,7 +20,7 @@
 
   
   <div class="flex flex-wrap items-center justify-between gap-4 mb-6">
-    <input type="text" placeholder="Search..." class="bg-white border border-gray-300 text-gray-800 text-sm px-4 py-1.5 rounded focus:outline-none focus:ring-2 focus:ring-black w-full max-w-xs" />
+
     <div class="flex items-center gap-2">
       <div class="relative">
         <button class="jsFilter flex items-center bg-white text-gray-800 border border-gray-300 text-sm px-3 py-1.5 rounded hover:bg-gray-100">
@@ -64,6 +64,12 @@
       </button>
     </div>
   </div>
+
+  @if($propiedades->isEmpty())
+    <div class="flex items-center justify-center h-96">
+        <p class="text-lg text-gray-600">No hay Propiedades</p>
+    </div>
+    @endif
 
   <!-- Vista GRID: Cards -->
   <div class="products-area-wrapper gridView grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">

@@ -20,11 +20,11 @@ return new class extends Migration
     /**
      * Reverse the migrations.
      */
-    public function down(): void
-    {
-        Schema::table('users', function (Blueprint $table) {
-                $table->string('lastname')->nullable()->change();
-                $table->string('phone');
-        });
-    }
+   public function down(): void
+{
+    Schema::table('users', function (Blueprint $table) {
+        $table->dropColumn(['lastname', 'phone']);
+    });
+}
+
 };

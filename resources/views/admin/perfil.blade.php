@@ -12,7 +12,7 @@
         </div>
     @endif
 
-    <form action="{{ route('agente.perfil.update') }}" method="POST" enctype="multipart/form-data" class="space-y-8">
+    <form action="{{ route('admin.perfil.update') }}" method="POST" enctype="multipart/form-data" class="space-y-8">
         @csrf
         @method('PUT')
 
@@ -58,90 +58,7 @@
             </div>
         </div>
 
-        <!-- 💼 Perfil profesional -->
-        <div class="bg-white rounded-xl shadow p-6 space-y-6">
-            <h2 class="text-xl font-bold text-gray-800 flex items-center gap-2">💼 Perfil profesional</h2>
-
-            <div class="grid md:grid-cols-2 gap-6">
-                <!-- Zona -->
-                <div>
-                    <label class="block text-gray-700 font-semibold mb-1">Zona de trabajo</label>
-                    <input type="text" name="zona" value="{{ old('zona', $user->agente->zona ?? '') }}"
-                        class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-[#BA9D79] {{ $errors->has('zona') ? 'border-red-500' : 'border-gray-300' }}">
-                    @error('zona')
-                        <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
-                    @enderror
-                </div>
-
-                <!-- Experiencia -->
-                <div>
-                    <label class="block text-gray-700 font-semibold mb-1">Experiencia (años)</label>
-                    <input type="number" name="experiencia" min="0" max="100" value="{{ old('experiencia', $user->agente->experiencia ?? '') }}"
-                        class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-[#BA9D79] {{ $errors->has('experiencia') ? 'border-red-500' : 'border-gray-300' }}">
-                    @error('experiencia')
-                        <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
-                    @enderror
-                </div>
-
-                <!-- Especialidad -->
-                <div class="md:col-span-2">
-                    <label class="block text-gray-700 font-semibold mb-1">Especialidad</label>
-                    <input type="text" name="especialidad" value="{{ old('especialidad', $user->agente->especialidad ?? '') }}"
-                        class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-[#BA9D79] {{ $errors->has('especialidad') ? 'border-red-500' : 'border-gray-300' }}">
-                    @error('especialidad')
-                        <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
-                    @enderror
-                </div>
-            </div>
-
-            <!-- Descripción -->
-            <div>
-                <label class="block text-gray-700 font-semibold mb-1">Descripción</label>
-                <textarea name="descripcion" rows="5"
-                    class="w-full px-4 py-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-[#BA9D79] {{ $errors->has('descripcion') ? 'border-red-500' : 'border-gray-300' }}">{{ old('descripcion', $user->agente->descripcion ?? '') }}</textarea>
-                @error('descripcion')
-                    <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
-                @enderror
-            </div>
-        </div>
-
-        <!-- 📱 Contacto -->
-        <div class="bg-white rounded-xl shadow p-6 space-y-6">
-            <h2 class="text-xl font-bold text-gray-800 flex items-center gap-2">📱 Datos de contacto</h2>
-
-            <div class="grid md:grid-cols-2 gap-6">
-                <!-- Teléfono -->
-                <div>
-                    <label class="block text-gray-700 font-semibold mb-1">Teléfono</label>
-                    <input type="text" name="phone" value="{{ old('phone', $user->phone) }}"
-                        class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-[#BA9D79] {{ $errors->has('phone') ? 'border-red-500' : 'border-gray-300' }}">
-                    @error('phone')
-                        <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
-                    @enderror
-                </div>
-
-                <!-- Teléfono adicional -->
-                <div>
-                    <label class="block text-gray-700 font-semibold mb-1">Teléfono adicional</label>
-                    <input type="text" name="telefono_adicional" value="{{ old('telefono_adicional', $user->agente->telefono_adicional ?? '') }}"
-                        class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-[#BA9D79] {{ $errors->has('telefono_adicional') ? 'border-red-500' : 'border-gray-300' }}">
-                    @error('telefono_adicional')
-                        <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
-                    @enderror
-                </div>
-
-                <!-- Red social -->
-                <div class="md:col-span-2">
-                    <label class="block text-gray-700 font-semibold mb-1">Red social</label>
-                    <input type="text" name="red_social" value="{{ old('red_social', $user->agente->red_social ?? '') }}"
-                        class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-[#BA9D79] {{ $errors->has('red_social') ? 'border-red-500' : 'border-gray-300' }}"
-                        placeholder="@miusuario">
-                    @error('red_social')
-                        <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
-                    @enderror
-                </div>
-            </div>
-        </div>
+        
 
         <!-- BOTÓN -->
         <div class="text-right">

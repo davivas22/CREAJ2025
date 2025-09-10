@@ -13,7 +13,7 @@
                             </button>
                             <div class="ml-4 md:ml-0">
                                 <h1 class="text-2xl font-bold text-gray-900">Dashboard</h1>
-                                <p class="text-sm text-gray-500">Bienvenido de nuevo, Admin</p>
+                                <p class="text-sm text-gray-500">Bienvenido de nuevo, {{ auth()->user()->name }} {{ auth()->user()->lastname }}</p>
                             </div>
                         </div>
 
@@ -57,24 +57,17 @@
                         </div>
 
 
-                            <!-- Messages -->
-                            <div class="relative" x-data="messages">
-                                <button @click="toggle()" class="p-2 text-gray-600 hover:text-gray-900 focus:outline-none">
-                                    <i class="fas fa-envelope text-xl"></i>
-                                    <span x-show="messages.some(m => m.unread)" class="absolute top-0 right-0 w-2 h-2 bg-blue-500 rounded-full"></span>
-                                </button>
-                               
-                            </div>
+                          
 
                             <!-- Profile Dropdown -->
                             <div class="relative" x-data="{ open: false }">
                                 <button @click="open = !open" class="flex items-center space-x-2 text-gray-600 hover:text-gray-900 focus:outline-none">
-                                    <img src="https://ui-avatars.com/api/?name=Admin+User&background=60A5FA&color=fff" class="w-8 h-8 rounded-lg">
+                                    <img src="{{auth()->user()->foto_perfil ? asset(auth()->user()->foto_perfil) : 'https://ui-avatars.com/api/?name='.urlencode(auth()->user()->name.' '.auth()->user()->lastname).'&background=BA9D79&color=000000' }}" class="w-8 h-8 rounded-lg">
                                     <i class="fas fa-chevron-down text-sm"></i>
                                 </button>
                                 <div x-show="open" @click.away="open = false" class="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg py-2">
-                                    <a href="perfil.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Mi Perfil</a>
-                                    <a href="configuracion.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Configuración</a>
+                                    <a href="{{route('admin.configuracion')}}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Mi Perfil</a>
+            
                                     <hr class="my-2">
                                     <form action="{{ route('logout') }}" method="POST">
                                         @csrf
@@ -246,28 +239,8 @@
 
                     <!-- Right Column -->
                     <div class="col-span-12 lg:col-span-4 space-y-6">
-                        <!-- Quick Actions -->
-                        <div class="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
-                            <h2 class="text-lg font-bold text-gray-900 mb-4">Acciones Rápidas</h2>
-                            <div class="grid grid-cols-2 gap-4">
-                                <button data-action="new-property" class="p-4 border border-gray-200 rounded-xl hover:border-blue-500 hover:bg-blue-50 transition-all duration-200 group">
-                                    <i class="fas fa-plus-circle text-2xl text-blue-500 mb-2"></i>
-                                    <p class="text-sm font-medium text-gray-900">Nueva Propiedad</p>
-                                </button>
-                                <button data-action="new-agent" class="p-4 border border-gray-200 rounded-xl hover:border-purple-500 hover:bg-purple-50 transition-all duration-200 group">
-                                    <i class="fas fa-user-plus text-2xl text-purple-500 mb-2"></i>
-                                    <p class="text-sm font-medium text-gray-900">Nuevo Agente</p>
-                                </button>
-                                <button data-action="new-appointment" class="p-4 border border-gray-200 rounded-xl hover:border-green-500 hover:bg-green-50 transition-all duration-200 group">
-                                    <i class="fas fa-calendar-plus text-2xl text-green-500 mb-2"></i>
-                                    <p class="text-sm font-medium text-gray-900">Nueva Cita</p>
-                                </button>
-                                <button data-action="view-reports" class="p-4 border border-gray-200 rounded-xl hover:border-yellow-500 hover:bg-yellow-50 transition-all duration-200 group">
-                                    <i class="fas fa-chart-line text-2xl text-yellow-500 mb-2"></i>
-                                    <p class="text-sm font-medium text-gray-900">Ver Reportes</p>
-                                </button>
-                            </div>
-                        </div>
+                       
+                        
 
                         <!-- Recent Activities -->
                         <div class="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
@@ -292,34 +265,8 @@
                             </div>
                         </div>
 
-                        <!-- Upcoming Appointments -->
-                        <div class="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
-                            <div class="flex items-center justify-between mb-4">
-                                <h2 class="text-lg font-bold text-gray-900">Próximas Citas</h2>
-                                <button class="text-sm text-blue-600 hover:text-blue-700">Ver todas</button>
-                            </div>
-                            <div class="space-y-4">
-                                <!-- Appointment Item -->
-                                <div class="flex items-center space-x-4 p-4 bg-gray-50 rounded-lg">
-                                    <div class="flex-shrink-0">
-                                        <div class="w-12 h-12 rounded-lg bg-blue-100 text-blue-600 flex flex-col items-center justify-center">
-                                            <span class="text-sm font-bold">24</span>
-                                            <span class="text-xs">MAR</span>
-                                        </div>
-                                    </div>
-                                    <div class="flex-1 min-w-0">
-                                        <p class="text-sm font-medium text-gray-900">Visita Casa Moderna</p>
-                                        <p class="text-xs text-gray-500">10:00 AM - Juan Pérez</p>
-                                    </div>
-                                    <button class="text-gray-400 hover:text-gray-600">
-                                        <i class="fas fa-ellipsis-v"></i>
-                                    </button>
-                                </div>
-
-                                <!-- More Appointment Items -->
-                                <!-- ... (similar structure for other appointments) ... -->
-                            </div>
-                        </div>
+                        
+                       
                     </div>
                 </div>
             </main>

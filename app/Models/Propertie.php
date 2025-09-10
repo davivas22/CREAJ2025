@@ -31,4 +31,10 @@ class Propertie extends Model
     public function imagenes(){
         return $this->hasMany(ImagenPropiedad::class,'propiedad_id');
     }
+
+    public function favoritos(){
+    return $this->belongsToMany(User::class, 'favoritos', 'propiedad_id', 'user_id')
+                ->withTimestamps();
+}
+
 }

@@ -5,21 +5,7 @@
  <section class="max-w-7xl mx-auto px-4 py-10">
     <h1 class="text-3xl font-bold mb-8 text-black">Administración de Propiedades</h1>
 
-    <!-- Filtros -->
-    <div class="bg-white shadow-md rounded-xl p-6 mb-8 grid grid-cols-1 md:grid-cols-5 gap-4">
-        <input type="text" placeholder="Buscar por título o ubicación" class="col-span-2 px-4 py-2 border border-gray-300 rounded-md focus:outline-none">
-        <select class="px-4 py-2 border border-gray-300 rounded-md">
-            <option>Tipo</option>
-            <option>Casa</option>
-            <option>Apartamento</option>
-        </select>
-        <select class="px-4 py-2 border border-gray-300 rounded-md">
-            <option>Estado</option>
-            <option>Publicado</option>
-            <option>Borrador</option>
-        </select>
-        <button class="bg-[#BA9D79] text-white rounded-md px-6 py-2 hover:bg-[#a88a67] transition">Buscar</button>
-    </div>
+    
 
     <!-- Tabla -->
     <div class="overflow-x-auto rounded-xl shadow-lg bg-white">

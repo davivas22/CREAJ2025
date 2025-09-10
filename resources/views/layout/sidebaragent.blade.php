@@ -72,22 +72,7 @@
             </div>
             <span class="text-label text-sm font-medium">Crear Propiedad</span>
           </a>
-          <a href="/agente/mensajes" class="group flex items-center gap-3 p-3 rounded-xl hover:bg-[#2A2A3F] transition-all duration-300 {{ request()->is('agente/mensajes*') ? 'bg-[#33334D] text-white' : 'text-white' }}">
-            <div class="flex items-center justify-center w-10 h-10">
-              <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M8 10h.01M12 10h.01M16 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
-              </svg>
-            </div>
-            <span class="text-label text-sm font-medium">Mensajes</span>
-          </a>
-          <a href="/agente/solicitudes" class="group flex items-center gap-3 p-3 rounded-xl hover:bg-[#2A2A3F] transition-all duration-300 {{ request()->is('agente/solicitudes*') ? 'bg-[#33334D] text-white' : 'text-white' }}">
-            <div class="flex items-center justify-center w-10 h-10">
-              <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M9 17v-2a4 4 0 118 0v2m-4 4h.01M4 6h16"/>
-              </svg>
-            </div>
-            <span class="text-label text-sm font-medium">Solicitudes</span>
-          </a>
+          
           <a href="{{ route('agente.perfil') }}" class="group flex items-center gap-3 p-3 rounded-xl hover:bg-[#2A2A3F] transition-all duration-300 {{ request()->is('agente/perfil*') ? 'bg-[#33334D] text-white' : 'text-white' }}">
             <div class="flex items-center justify-center w-10 h-10">
               <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">

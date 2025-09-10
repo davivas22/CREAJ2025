@@ -3,14 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>ENCASA - Tu mejor solución para el hogar</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css" />
-    <!-- Leaflet CSS -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  
+   
 
+   
     @vite(['resources/css/app.css', 'resources/js/page/index.js'])
     <style>
         .parallax-scroll {
@@ -120,6 +123,26 @@
                     <a href="/about" class="text-black font-medium  hover:text-[#BA9D79] relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-[#BA9D79] hover:after:w-full after:transition-all after:duration-300">Acerca de</a>
                     <a href="{{route('page.propiedades')}}" class="text-black font-medium  hover:text-[#BA9D79] relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-[#BA9D79] hover:after:w-full after:transition-all after:duration-300">Propiedades</a>
                     <a href="{{route('contacto')}}" class="text-black font-medium  hover:text-[#BA9D79] relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-[#BA9D79] hover:after:w-full after:transition-all after:duration-300">Contacto</a>
+                    @if($favoritosCount > 0)
+                        <a href="{{ route('favoritos.index') }}" class="flex items-center gap-1 text-gray-700 hover:text-red-600">
+                            <!-- Ícono corazón -->
+                            <svg xmlns="http://www.w3.org/2000/svg" 
+                                class="w-6 h-6 text-red-600" 
+                                viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 
+                                        2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 
+                                        4.5 2.09C13.09 3.81 14.76 3 16.5 
+                                        3 19.58 3 22 5.42 22 8.5c0 
+                                        3.78-3.4 6.86-8.55 11.54L12 
+                                        21.35z"/>
+                            </svg>
+
+                            <!-- Número de favoritos -->
+                            <span class="font-medium">({{ $favoritosCount }})</span>
+                        </a>
+                    @endif
+
+
                 </nav>
                 @guest
                         <!-- Botón de inicio de sesión -->
@@ -142,8 +165,10 @@
                     <div id="dropdownMenu" class="origin-top-right absolute right-0 mt-2 w-48 rounded-lg shadow-lg bg-white ring-1 ring-black ring-opacity-5 hidden z-50">
                         <div class="py-1 text-sm text-gray-800">
                             <a href="{{route('page.perfil', auth()->user()->id)}}" class="block px-4 py-2 hover:bg-[#BA9D79] hover:text-white transition">Perfil</a>
+                            <a href="{{route('page.solicitud')}}" class="block px-4 py-2 hover:bg-[#BA9D79] hover:text-white transition">Convertirse en agente</a>
+                            <a href="{{route('favoritos.index')}}" class="block px-4 py-2 hover:bg-[#BA9D79] hover:text-white transition">Favoritos</a>
                             <a href="#" onclick="document.getElementById('logout-form').submit()" class="block px-4 py-2 hover:bg-[#BA9D79] hover:text-white transition">Cerrar sesión</a>
-                             <a href="{{route('page.solicitud')}}" class="block px-4 py-2 hover:bg-[#BA9D79] hover:text-white transition">Convertirse en agente</a>
+                             
                         </div>
                     </div>
 
@@ -183,6 +208,98 @@
         
     </main>
 
+     <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-16 mt-12">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="grid md:grid-cols-4 gap-8 mb-8">
+                <!-- Company Info -->
+                <div class="animate-slide-up">
+                    <div class="flex items-center space-x-3 mb-6">
+                        <div class="w-10 h-10 bg-gradient-to-br from-encasa-primary to-encasa-dark rounded-lg flex items-center justify-center animate-glow">
+                            <i class="fas fa-home text-white text-lg"></i>
+                        </div>
+                        <span class="text-2xl font-bold bg-gradient-to-r from-encasa-light to-white bg-clip-text text-transparent">ENCASA</span>
+                    </div>
+                    <p class="text-gray-400 leading-relaxed mb-4">
+                        Tu socio confiable en el mundo inmobiliario. Hacemos realidad el sueño de tu hogar propio.
+                    </p>
+                    <div class="flex space-x-4">
+                        <div class="w-10 h-10 bg-encasa-dark rounded-full flex items-center justify-center hover:bg-encasa-darker transition-colors cursor-pointer">
+                            <i class="fab fa-facebook-f text-white"></i>
+                        </div>
+                        <div class="w-10 h-10 bg-pink-600 rounded-full flex items-center justify-center hover:bg-pink-700 transition-colors cursor-pointer animate-float" style="animation-delay: 0.5s">
+                            <i class="fab fa-instagram text-white"></i>
+                        </div>
+                        <div class="w-10 h-10 bg-encasa-secondary rounded-full flex items-center justify-center hover:bg-encasa-dark transition-colors cursor-pointer">
+                            <i class="fab fa-linkedin-in text-white"></i>
+                        </div>
+                        <div class="w-10 h-10 bg-encasa-primary rounded-full flex items-center justify-center hover:bg-encasa-dark transition-colors cursor-pointer animate-float" style="animation-delay: 1.5s">
+                            <i class="fab fa-whatsapp text-white"></i>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Services -->
+                <div class="animate-slide-up" style="animation-delay: 0.2s">
+                    <h3 class="text-lg font-bold mb-6 text-encasa-light">Servicios</h3>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors flex items-center"><i class="fas fa-chevron-right mr-2 text-encasa-primary"></i>Venta de Propiedades</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors flex items-center"><i class="fas fa-chevron-right mr-2 text-encasa-primary"></i>Alquiler</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors flex items-center"><i class="fas fa-chevron-right mr-2 text-encasa-primary"></i>Gestión Integral</a></li>
+             
+                    </ul>
+                </div>
+                
+                <!-- Quick Links -->
+                <div class="animate-slide-up" style="animation-delay: 0.4s">
+                    <h3 class="text-lg font-bold mb-6 text-encasa-light">Enlaces Rápidos</h3>
+                    <ul class="space-y-3">
+                        <li><a href="{{route('register')}}" class="text-gray-400 hover:text-white transition-colors flex items-center"><i class="fas fa-chevron-right mr-2 text-encasa-primary"></i>Registro</a></li>
+                        <li><a href="{{route('about')}}" class="text-gray-400 hover:text-white transition-colors flex items-center"><i class="fas fa-chevron-right mr-2 text-encasa-primary"></i>Acerca de</a></li>
+                        <li><a href="{{route('page.propiedades')}}" class="text-gray-400 hover:text-white transition-colors flex items-center"><i class="fas fa-chevron-right mr-2 text-encasa-primary"></i>Propiedades</a></li>
+                        <li><a href="{{route('contacto')}}" class="text-gray-400 hover:text-white transition-colors flex items-center"><i class="fas fa-chevron-right mr-2 text-encasa-primary"></i>Contacto</a></li>
+                        
+                    </ul>
+                </div>
+                
+                <!-- Contact Info -->
+                <div class="animate-slide-up" style="animation-delay: 0.6s">
+                    <h3 class="text-lg font-bold mb-6 text-encasa-light">Contacto</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-start">
+                            <i class="fas fa-map-marker-alt text-encasa-primary mt-1 mr-3"></i>
+                            <div>
+                                <p class="text-gray-400">Col. Escalón</p>
+                                <p class="text-gray-400">San Salvador, El Salvador</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-phone text-encasa-primary mr-3"></i>
+                            <p class="text-gray-400">+503 2234-5678</p>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-envelope text-encasa-primary mr-3"></i>
+                            <p class="text-gray-400">info@encasa.com.sv</p>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-clock text-encasa-primary mr-3"></i>
+                            <p class="text-gray-400">Lun - Vie: 8:00 AM - 6:00 PM</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Bottom Footer -->
+            <div class="border-t border-gray-800 pt-8 mt-8">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <p class="text-gray-400 mb-4 md:mb-0">
+                        © 2025 ENCASA. Todos los derechos reservados.
+                    </p>
+                    
+                </div>
+            </div>
+        </div>
+    </footer>
 
     <script>
     function toggleMenu() {

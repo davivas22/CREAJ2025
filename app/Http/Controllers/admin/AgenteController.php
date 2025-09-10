@@ -20,6 +20,8 @@ class AgenteController extends Controller
         if($agente->hasRole('agente')){
             $agente->removeRole('agente');
 
+            
+               $agente->propiedad()->delete();
             //Eliminar la relacion con la tabla agente
             $agente->agente()->delete();
 

@@ -61,5 +61,15 @@ class User extends Authenticatable implements MustVerifyEmail
     public function agente(){
         return $this->hasOne(Agente::class);
     }
+
+    public function ratings(){
+    return $this->hasMany(Agente_User_Rating::class,'user_id');
+    }
+    public function favoritos(){
+    return $this->belongsToMany(Propertie::class, 'favoritos', 'user_id', 'propiedad_id')
+                ->withTimestamps();
+}
+
+
     
 }

@@ -9,19 +9,19 @@
   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
     <div class="bg-white border shadow rounded-xl p-5">
       <p class="text-sm text-gray-500">Propiedades activas</p>
-      <p class="text-3xl font-bold">12</p>
+      <p class="text-3xl font-bold">{{$totalpropiedades->count()}}</p>
     </div>
     <div class="bg-white border shadow rounded-xl p-5">
       <p class="text-sm text-gray-500">Solicitudes recibidas</p>
-      <p class="text-3xl font-bold">27</p>
+      <p class="text-3xl font-bold">0</p>
     </div>
     <div class="bg-white border shadow rounded-xl p-5">
       <p class="text-sm text-gray-500">Interesados este mes</p>
-      <p class="text-3xl font-bold">89</p>
+      <p class="text-3xl font-bold">0</p>
     </div>
     <div class="bg-white border shadow rounded-xl p-5">
       <p class="text-sm text-gray-500">Propiedades vendidas</p>
-      <p class="text-3xl font-bold">5</p>
+      <p class="text-3xl font-bold">0</p>
     </div>
   </div>
 

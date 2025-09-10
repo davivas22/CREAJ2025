@@ -2,154 +2,397 @@
 
 @section('content')
 
-<!-- Sección Sobre Nosotros -->
-<section class="py-16 bg-white text-gray-900" id="sobre-nosotros">
-  <div class="max-w-7xl mx-auto px-6">
-    <!-- Título -->
-    <h2 class="text-5xl font-extrabold text-center text-[#BA9D79] mb-12">Sobre Nosotros</h2>
-    <p class="text-lg text-center text-gray-600 mb-8">En EnCasa, nos apasiona ayudarte a encontrar el hogar de tus sueños. Con un equipo de expertos en bienes raíces, cada cliente recibe atención personalizada, asesoría integral y el mejor servicio posible. Conoce a nuestros agentes y descubre lo que podemos hacer por ti.</p>
+<script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'brown-custom': '#BA9D79',
+                        'brown-light': '#D4C4A8'
+                    }
+                }
+            }
+        }
+    </script>
 
-    <!-- Sección de Agentes -->
-    <div class="grid md:grid-cols-3 gap-16">
-      <!-- Agente Jimmy Peña -->
-      <div class="bg-white p-6 rounded-2xl shadow-xl hover:shadow-2xl transform hover:scale-105 transition duration-500">
-        <img src="https://cdn-icons-png.flaticon.com/512/6522/6522581.png" alt="Jimmy Peña" class="w-full h-64 object-cover rounded-lg mb-6 border-4 border-[#BA9D79]">
-        <h4 class="text-2xl font-semibold text-[#BA9D79] mb-2">Jimmy Peña</h4>
-        <p class="text-lg text-gray-600 mb-4">Especialista en Bienes Raíces con más de 5 años de experiencia en el sector. Conoce a fondo el mercado inmobiliario y siempre está dispuesto a ayudarte a encontrar la propiedad perfecta.</p>
-        <ul class="space-y-3 text-lg">
-          <li class="flex items-center">
-            <i class="fas fa-briefcase text-[#BA9D79] text-xl mr-3"></i>
-            <span>5+ años de experiencia</span>
-          </li>
-          <li class="flex items-center">
-            <i class="fas fa-phone-alt text-[#BA9D79] text-xl mr-3"></i>
-            <span>+503 9876 5432</span>
-          </li>
-          <li class="flex items-center">
-            <i class="fas fa-envelope text-[#BA9D79] text-xl mr-3"></i>
-            <span>jimmy@encasa.com</span>
-          </li>
-        </ul>
-        <a href="mailto:jimmy@encasa.com" class="bg-[#BA9D79] hover:bg-[#a38564] text-white py-2 px-4 rounded-full mt-4 inline-block">Contactar a Jimmy</a>
-      </div>
-
-      <!-- Agente Steven Quevedo -->
-      <div class="bg-white p-6 rounded-2xl shadow-xl hover:shadow-2xl transform hover:scale-105 transition duration-500">
-        <img src="https://cdn-icons-png.flaticon.com/512/6522/6522581.png" alt="Steven Quevedo" class="w-full h-64 object-cover rounded-lg mb-6 border-4 border-[#BA9D79]">
-        <h4 class="text-2xl font-semibold text-[#BA9D79] mb-2">Steven Quevedo</h4>
-        <p class="text-lg text-gray-600 mb-4">Con años de experiencia, Steven se dedica a ofrecer un servicio altamente personalizado, ayudando a sus clientes a tomar decisiones informadas y acertadas en el mercado inmobiliario.</p>
-        <ul class="space-y-3 text-lg">
-          <li class="flex items-center">
-            <i class="fas fa-briefcase text-[#BA9D79] text-xl mr-3"></i>
-            <span>Especialista en ventas</span>
-          </li>
-          <li class="flex items-center">
-            <i class="fas fa-phone-alt text-[#BA9D79] text-xl mr-3"></i>
-            <span>+503 1234 5678</span>
-          </li>
-          <li class="flex items-center">
-            <i class="fas fa-envelope text-[#BA9D79] text-xl mr-3"></i>
-            <span>steven@encasa.com</span>
-          </li>
-        </ul>
-        <a href="mailto:steven@encasa.com" class="bg-[#BA9D79] hover:bg-[#a38564] text-white py-2 px-4 rounded-full mt-4 inline-block">Contactar a Steven</a>
-      </div>
-
-      <!-- Agente Samuel Menjivar -->
-      <div class="bg-white p-6 rounded-2xl shadow-xl hover:shadow-2xl transform hover:scale-105 transition duration-500">
-        <img src="https://cdn-icons-png.flaticon.com/512/6522/6522581.png" alt="Samuel Menjivar" class="w-full h-64 object-cover rounded-lg mb-6 border-4 border-[#BA9D79]">
-        <h4 class="text-2xl font-semibold text-[#BA9D79] mb-2">Samuel Menjivar</h4>
-        <p class="text-lg text-gray-600 mb-4">Samuel es reconocido por su atención al detalle y su enfoque único hacia cada cliente. Se asegura de que cada transacción sea satisfactoria y segura para todas las partes.</p>
-        <ul class="space-y-3 text-lg">
-          <li class="flex items-center">
-            <i class="fas fa-briefcase text-[#BA9D79] text-xl mr-3"></i>
-            <span>Especialista en bienes residenciales</span>
-          </li>
-          <li class="flex items-center">
-            <i class="fas fa-phone-alt text-[#BA9D79] text-xl mr-3"></i>
-            <span>+503 2345 6789</span>
-          </li>
-          <li class="flex items-center">
-            <i class="fas fa-envelope text-[#BA9D79] text-xl mr-3"></i>
-            <span>samuel@encasa.com</span>
-          </li>
-        </ul>
-        <a href="mailto:samuel@encasa.com" class="bg-[#BA9D79] hover:bg-[#a38564] text-white py-2 px-4 rounded-full mt-4 inline-block">Contactar a Samuel</a>
-      </div>
-    </div>
-
-    <!-- Sección de Valores y Compromiso -->
-    <div class="mt-16 bg-[#f9f9f9] py-12 px-6 rounded-lg shadow-md text-center">
-      <h3 class="text-3xl font-semibold text-[#BA9D79] mb-6">Nuestros Valores y Compromiso</h3>
-      <p class="text-lg text-gray-600">En EnCasa, nos comprometemos a brindarte un servicio de calidad, profesionalismo y transparencia. Creemos en la honestidad, la atención personalizada y la excelencia en cada transacción. Tu satisfacción es nuestra prioridad.</p>
-    </div>
-
-    <!-- Testimonios de Clientes -->
-    <div class="mt-16 text-center">
-      <h3 class="text-3xl font-semibold text-[#BA9D79] mb-6">Testimonios</h3>
-      <div class="flex justify-center gap-8">
-        <div class="bg-white p-6 rounded-lg shadow-lg max-w-xs">
-          <p class="text-gray-600 italic mb-4">"Gracias a EnCasa, encontramos la casa perfecta para nuestra familia. El proceso fue rápido y muy fácil, ¡sin duda los recomendaré!"</p>
-          <div class="flex items-center">
-            <img src="https://randomuser.me/api/portraits/women/44.jpg" class="w-12 h-12 rounded-full mr-4">
-            <div>
-              <p class="font-semibold text-gray-800">Ana Gómez</p>
-              <p class="text-sm text-gray-500">San Salvador</p>
+ <section class="py-20 bg-white" id="about">
+            <div class="max-w-6xl mx-auto px-6">
+                <h2 class="text-5xl font-light text-center text-gray-800 mb-4">
+                   Conocenos
+                </h2>
+                <div class="w-20 h-1 bg-brown-custom mx-auto mb-16"></div>
+                
+                <!-- Timeline Layout -->
+                <div class="relative hidden md:block">
+                    <!-- Vertical Line -->
+                    <div class="absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-gradient-to-b from-brown-custom to-brown-light"></div>
+                    
+                    <!-- Mission - Left Side -->
+                    <div class="flex items-center mb-16">
+                        <div class="w-1/2 pr-8 text-right">
+                            <div class="bg-gradient-to-l from-brown-50 to-white p-8 rounded-l-3xl border-l-4 border-brown-custom">
+                                <h3 class="text-3xl font-bold text-gray-800 mb-4">Nuestra Misión</h3>
+                                <p class="text-gray-600 leading-relaxed text-lg">
+                                    Aspiramos a crear espacios habitables que inspiren y conecten a las personas con su hogar ideal, aprendiendo y creciendo mientras combinamos funcionalidad, estética y sostenibilidad.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="w-16 h-16 bg-gradient-to-br from-brown-custom to-brown-light rounded-full flex items-center justify-center text-2xl z-10 shadow-lg">
+                            🏠
+                        </div>
+                        <div class="w-1/2 pl-8"></div>
+                    </div>
+                    
+                    <!-- Vision - Right Side -->
+                    <div class="flex items-center mb-16">
+                        <div class="w-1/2 pr-8"></div>
+                        <div class="w-16 h-16 bg-gradient-to-br from-brown-custom to-brown-light rounded-full flex items-center justify-center text-2xl z-10 shadow-lg">
+                            👁️
+                        </div>
+                        <div class="w-1/2 pl-8">
+                            <div class="bg-gradient-to-r from-brown-50 to-white p-8 rounded-r-3xl border-r-4 border-brown-custom">
+                                <h3 class="text-3xl font-bold text-gray-800 mb-4">Nuestra Visión</h3>
+                                <p class="text-gray-600 leading-relaxed text-lg">
+                                    Convertirnos en una empresa reconocida en diseño de interiores, construyendo nuestra reputación día a día a través de la innovación, calidad y nuestro genuino compromiso con cada cliente.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Experience - Left Side -->
+                    <div class="flex items-center">
+                        <div class="w-1/2 pr-8 text-right">
+                            <div class="bg-gradient-to-l from-brown-50 to-white p-8 rounded-l-3xl border-l-4 border-brown-custom">
+                                <h3 class="text-3xl font-bold text-gray-800 mb-4">Nuestro Crecimiento</h3>
+                                <p class="text-gray-600 leading-relaxed text-lg">
+                                    Aunque somos una empresa joven con 2 años en el mercado, hemos logrado transformar más de 15 hogares, aprendiendo de cada proyecto y creando espacios únicos que reflejan la personalidad de nuestros clientes.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="w-16 h-16 bg-gradient-to-br from-brown-custom to-brown-light rounded-full flex items-center justify-center text-2xl z-10 shadow-lg">
+                            ⭐
+                        </div>
+                        <div class="w-1/2 pl-8"></div>
+                    </div>
+                </div>
+                
+                <!-- Mobile Timeline -->
+                <div class="md:hidden space-y-8 mt-16">
+                    <div class="flex items-start space-x-4">
+                        <div class="w-12 h-12 bg-gradient-to-br from-yellow-custom to-yellow-light rounded-full flex items-center justify-center text-xl flex-shrink-0">
+                            🏠
+                        </div>
+                        <div class="bg-yellow-50 p-6 rounded-2xl border-l-4 border-yellow-custom">
+                            <h3 class="text-2xl font-bold text-gray-800 mb-3">Nuestra Misión</h3>
+                            <p class="text-gray-600 leading-relaxed">
+                                Aspiramos a crear espacios habitables que inspiren y conecten a las personas con su hogar ideal, aprendiendo y creciendo mientras combinamos funcionalidad, estética y sostenibilidad.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-start space-x-4">
+                        <div class="w-12 h-12 bg-gradient-to-br from-yellow-custom to-yellow-light rounded-full flex items-center justify-center text-xl flex-shrink-0">
+                            👁️
+                        </div>
+                        <div class="bg-yellow-50 p-6 rounded-2xl border-l-4 border-yellow-custom">
+                            <h3 class="text-2xl font-bold text-gray-800 mb-3">Nuestra Visión</h3>
+                            <p class="text-gray-600 leading-relaxed">
+                                Convertirnos en una empresa reconocida en diseño de interiores, construyendo nuestra reputación día a día a través de la innovación, calidad y nuestro genuino compromiso con cada cliente.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-start space-x-4">
+                        <div class="w-12 h-12 bg-gradient-to-br from-yellow-custom to-yellow-light rounded-full flex items-center justify-center text-xl flex-shrink-0">
+                            ⭐
+                        </div>
+                        <div class="bg-yellow-50 p-6 rounded-2xl border-l-4 border-yellow-custom">
+                            <h3 class="text-2xl font-bold text-gray-800 mb-3">Nuestro Crecimiento</h3>
+                            <p class="text-gray-600 leading-relaxed">
+                                Aunque somos una empresa joven con 2 años en el mercado, hemos logrado transformar más de 15 hogares, aprendiendo de cada proyecto y creando espacios únicos que reflejan la personalidad de nuestros clientes.
+                            </p>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
-        </div>
-        <div class="bg-white p-6 rounded-lg shadow-lg max-w-xs">
-          <p class="text-gray-600 italic mb-4">"¡El servicio fue excelente! Los agentes realmente se preocuparon por entender nuestras necesidades y nos ayudaron a elegir la propiedad perfecta."</p>
-          <div class="flex items-center">
-            <img src="https://randomuser.me/api/portraits/men/24.jpg" class="w-12 h-12 rounded-full mr-4">
-            <div>
-              <p class="font-semibold text-gray-800">Carlos Pérez</p>
-              <p class="text-sm text-gray-500">Santa Tecla</p>
+        </section>
+
+        <!-- Values Section -->
+        <section class="py-20 bg-gradient-to-br from-gray-50 to-white relative overflow-hidden">
+            <div class="max-w-7xl mx-auto px-6 relative">
+                <div class="text-center mb-16">
+                    <h2 class="text-5xl font-bold text-gray-800 mb-6">
+                        Nuestros <span class="text-transparent bg-clip-text bg-gradient-to-r from-brown-custom to-brown-light">Valores</span>
+                    </h2>
+                    <p class="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+                        Los principios que nos inspiran y guían nuestro crecimiento mientras trabajamos hacia la excelencia
+                    </p>
+                </div>
+                
+                <!-- Values Grid -->
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
+                    <!-- Value 1: Excelencia -->
+                    <div class="group text-center">
+                        <div class="bg-white p-8 rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-100">
+                            <div class="w-16 h-16 bg-gradient-to-br from-yellow-custom to-yellow-light rounded-2xl mx-auto mb-6 flex items-center justify-center text-2xl text-white shadow-lg group-hover:scale-110 transition-transform duration-300">
+                                🎯
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-800 mb-3">Dedicación</h3>
+                            <p class="text-gray-600 text-sm leading-relaxed">
+                                Nos esforzamos por superar expectativas en cada detalle, aprendiendo y mejorando constantemente
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <!-- Value 2: Innovación -->
+                    <div class="group text-center">
+                        <div class="bg-white p-8 rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-100">
+                            <div class="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl mx-auto mb-6 flex items-center justify-center text-2xl text-white shadow-lg group-hover:scale-110 transition-transform duration-300">
+                                💡
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-800 mb-3">Aprendizaje</h3>
+                            <p class="text-gray-600 text-sm leading-relaxed">
+                                Nos mantenemos actualizados con las últimas tendencias, siempre dispuestos a innovar
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <!-- Value 3: Confianza -->
+                    <div class="group text-center">
+                        <div class="bg-white p-8 rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-100">
+                            <div class="w-16 h-16 bg-gradient-to-br from-green-500 to-green-600 rounded-2xl mx-auto mb-6 flex items-center justify-center text-2xl text-white shadow-lg group-hover:scale-110 transition-transform duration-300">
+                                🤝
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-800 mb-3">Honestidad</h3>
+                            <p class="text-gray-600 text-sm leading-relaxed">
+                                Construimos relaciones sólidas basadas en transparencia y comunicación abierta
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <!-- Value 4: Sostenibilidad -->
+                    <div class="group text-center">
+                        <div class="bg-white p-8 rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-100">
+                            <div class="w-16 h-16 bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-2xl mx-auto mb-6 flex items-center justify-center text-2xl text-white shadow-lg group-hover:scale-110 transition-transform duration-300">
+                                🌱
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-800 mb-3">Responsabilidad</h3>
+                            <p class="text-gray-600 text-sm leading-relaxed">
+                                Nos comprometemos con materiales eco-friendly y prácticas responsables desde el inicio
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Stats Section -->
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="text-center p-8 bg-gradient-to-br from-brown-50 to-white rounded-3xl shadow-lg border border-brown-custom/10">
+                        <div class="text-4xl font-bold text-brown-custom mb-2">2+</div>
+                        <div class="text-gray-600 font-medium">Años Creciendo</div>
+                    </div>
+                    <div class="text-center p-8 bg-gradient-to-br from-brown-50 to-white rounded-3xl shadow-lg border border-brown-custom/10">
+                        <div class="text-4xl font-bold text-brown-custom mb-2">15+</div>
+                        <div class="text-gray-600 font-medium">Proyectos Realizados</div>
+                    </div>
+                    <div class="text-center p-8 bg-gradient-to-br from-brown-50 to-white rounded-3xl shadow-lg border border-brown-custom/10">
+                        <div class="text-4xl font-bold text-brown-custom mb-2">100%</div>
+                        <div class="text-gray-600 font-medium">Compromiso</div>
+                    </div>
+                </div>
             </div>
-          </div>
-        </div>
-      </div>
-    </div>
+        </section>
 
-   <!-- Sección de Misión, Visión y Valores con Cards Creativas y Fondo Único -->
-<section class="py-16 bg-white text-gray-900" id="mision-vision-valores">
-  <div class="max-w-7xl mx-auto px-6">
-    <!-- Título -->
-    <h2 class="text-5xl font-extrabold text-center text-[#BA9D79] mb-12">Nuestra Misión, Visión y Valores</h2>
-    
-    <div class="grid md:grid-cols-3 gap-16">
-      <!-- Card de Misión -->
-      <div class="bg-[#BA9D79] text-white p-8 rounded-xl shadow-lg transform hover:scale-105 transition duration-300">
-        <div class="text-4xl mb-6">
-          <i class="fas fa-bullseye"></i>
-        </div>
-        <h4 class="text-3xl font-semibold mb-4">Misión</h4>
-        <p class="text-lg">Nuestra misión es ofrecer un servicio inmobiliario de alta calidad, basado en la confianza y la honestidad, ayudando a nuestros clientes a tomar decisiones informadas y satisfactorias en el proceso de compra y venta de propiedades.</p>
-      </div>
-
-      <!-- Card de Visión -->
-      <div class="bg-[#BA9D79] text-white p-8 rounded-xl shadow-lg transform hover:scale-105 transition duration-300">
-        <div class="text-4xl mb-6">
-          <i class="fas fa-eye"></i>
-        </div>
-        <h4 class="text-3xl font-semibold mb-4">Visión</h4>
-        <p class="text-lg">Ser reconocidos como la agencia inmobiliaria más confiable de El Salvador, brindando soluciones innovadoras, servicios personalizados y un alto nivel de satisfacción para nuestros clientes.</p>
-      </div>
-
-      <!-- Card de Valores -->
-      <div class="bg-[#BA9D79] text-white p-8 rounded-xl shadow-lg transform hover:scale-105 transition duration-300">
-        <div class="text-4xl mb-6">
-          <i class="fas fa-handshake"></i>
-        </div>
-        <h4 class="text-3xl font-semibold mb-4">Valores</h4>
-        <ul class="text-lg space-y-4">
-          <li><strong>Confianza:</strong> Construimos relaciones duraderas basadas en la transparencia.</li>
-          <li><strong>Profesionalismo:</strong> Nos comprometemos a ofrecer un servicio excepcional en todo momento.</li>
-          <li><strong>Honestidad:</strong> Siempre actuamos con integridad y responsabilidad.</li>
-          <li><strong>Innovación:</strong> Buscamos soluciones creativas y eficientes para cada cliente.</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
+        <!-- Services Section -->
+        <section class="py-20 bg-gradient-to-br from-gray-50 to-white">
+            <div class="max-w-7xl mx-auto px-6">
+                <h2 class="text-5xl font-light text-center text-gray-800 mb-4">
+                    Nuestros <span class="text-transparent bg-clip-text bg-gradient-to-r from-brown-custom to-brown-light">Servicios</span>
+                </h2>
+                <div class="w-20 h-1 bg-brown-custom mx-auto mb-16"></div>
+                
+                <!-- Interactive Service Tabs -->
+                <div class="flex flex-wrap justify-center mb-12 space-x-2 space-y-2 md:space-y-0">
+                    <button class="service-tab px-6 py-3 bg-brown-custom text-white rounded-full font-medium transition-all duration-300 shadow-lg" onclick="showService('interior')">
+                        Diseño Interior
+                    </button>
+                    <button class="service-tab px-6 py-3 bg-gray-200 text-gray-700 hover:bg-gray-300 rounded-full font-medium transition-all duration-300" onclick="showService('construccion')">
+                        Construcción
+                    </button>
+                    <button class="service-tab px-6 py-3 bg-gray-200 text-gray-700 hover:bg-gray-300 rounded-full font-medium transition-all duration-300" onclick="showService('consultoria')">
+                        Consultoría
+                    </button>
+                    
+                </div>
+                
+                <!-- Service Content -->
+                <div class="service-content" id="interior">
+                    <div class="grid md:grid-cols-2 gap-12 items-center">
+                        <div class="space-y-6">
+                            <div class="flex items-center space-x-4">
+                                <div class="w-16 h-16 bg-gradient-to-br from-brown-custom to-brown-light rounded-2xl flex items-center justify-center text-2xl text-white">
+                                    🎨
+                                </div>
+                                <div>
+                                    <h3 class="text-2xl font-bold text-gray-800">Diseño Interior Personalizado</h3>
+                                    <p class="text-brown-custom font-medium">Espacios únicos que reflejan tu personalidad</p>
+                                </div>
+                            </div>
+                            
+                            <p class="text-gray-600 leading-relaxed text-lg">
+                                Nos especializamos en crear ambientes únicos y funcionales que se adapten a tu estilo de vida. 
+                                Nuestro equipo joven y entusiasta trabaja de cerca contigo para transformar tus ideas en realidad.
+                            </p>
+                            
+                            <div class="grid grid-cols-2 gap-4">
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-2 h-2 bg-brown-custom rounded-full"></div>
+                                    <span class="text-gray-700">Planos 3D</span>
+                                </div>
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-2 h-2 bg-brown-custom rounded-full"></div>
+                                    <span class="text-gray-700">Selección de materiales</span>
+                                </div>
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-2 h-2 bg-brown-custom rounded-full"></div>
+                                    <span class="text-gray-700">Iluminación especializada</span>
+                                </div>
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-2 h-2 bg-brown-custom rounded-full"></div>
+                                    <span class="text-gray-700">Mobiliario a medida</span>
+                                </div>
+                            </div>
+                            
+                            <button class="bg-gradient-to-r from-brown-custom to-brown-light text-white px-8 py-4 rounded-2xl font-semibold hover:shadow-lg transform hover:-translate-y-1 transition-all duration-300">
+                                Solicitar Consulta Gratuita
+                            </button>
+                        </div>
+                        
+                        <div class="relative">
+                            <div class="bg-gradient-to-br from-brown-50 to-white p-8 rounded-3xl shadow-xl">
+                                <div class="aspect-video bg-gradient-to-br from-brown-100 to-brown-50 rounded-2xl flex items-center justify-center text-6xl">
+                                    🏠
+                                </div>
+                                <div class="mt-6 space-y-4">
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-gray-600">Proyectos realizados</span>
+                                        <span class="text-2xl font-bold text-brown-custom">15+</span>
+                                    </div>
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-gray-600">Tiempo promedio</span>
+                                        <span class="text-2xl font-bold text-brown-custom">45 días</span>
+                                    </div>
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-gray-600">Dedicación</span>
+                                        <span class="text-2xl font-bold text-brown-custom">100%</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="service-content hidden" id="construccion">
+                    <div class="grid md:grid-cols-3 gap-8">
+                        <div class="bg-white p-8 rounded-3xl shadow-lg hover:shadow-xl transition-all duration-300 border-t-4 border-brown-custom">
+                            <div class="w-16 h-16 bg-brown-custom rounded-2xl flex items-center justify-center text-2xl text-white mb-6">
+                                🏗️
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-800 mb-4">Construcción Residencial</h3>
+                            <p class="text-gray-600 mb-6">Casas y apartamentos con los más altos estándares de calidad</p>
+                            <ul class="space-y-2 text-sm text-gray-600">
+                                <li>• Estructuras sismo-resistentes</li>
+                                <li>• Materiales de primera calidad</li>
+                                <li>• Acabados personalizados</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="bg-white p-8 rounded-3xl shadow-lg hover:shadow-xl transition-all duration-300 border-t-4 border-brown-custom">
+                            <div class="w-16 h-16 bg-brown-custom rounded-2xl flex items-center justify-center text-2xl text-white mb-6">
+                                🏢
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-800 mb-4">Construcción Comercial</h3>
+                            <p class="text-gray-600 mb-6">Oficinas y locales comerciales funcionales y modernos</p>
+                            <ul class="space-y-2 text-sm text-gray-600">
+                                <li>• Espacios optimizados</li>
+                                <li>• Tecnología integrada</li>
+                                <li>• Certificaciones ambientales</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="bg-white p-8 rounded-3xl shadow-lg hover:shadow-xl transition-all duration-300 border-t-4 border-brown-custom">
+                            <div class="w-16 h-16 bg-brown-custom rounded-2xl flex items-center justify-center text-2xl text-white mb-6">
+                                🔧
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-800 mb-4">Remodelaciones</h3>
+                            <p class="text-gray-600 mb-6">Transformamos espacios existentes en lugares extraordinarios</p>
+                            <ul class="space-y-2 text-sm text-gray-600">
+                                <li>• Renovación completa</li>
+                                <li>• Ampliaciones</li>
+                                <li>• Modernización</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="service-content hidden" id="consultoria">
+                    <div class="text-center max-w-4xl mx-auto">
+                        <div class="w-24 h-24 bg-brown-custom rounded-full flex items-center justify-center text-4xl text-white mx-auto mb-8">
+                            💡
+                        </div>
+                        <h3 class="text-3xl font-bold text-gray-800 mb-6">Consultoría Especializada</h3>
+                        <p class="text-xl text-gray-600 mb-12 leading-relaxed">
+                            Te acompañamos desde la conceptualización hasta la ejecución de tu proyecto, 
+                            brindando asesoría dedicada y personalizada en cada etapa del proceso.
+                        </p>
+                        
+                        <div class="grid md:grid-cols-2 gap-8 text-left">
+                            <div class="space-y-6">
+                                <div class="flex items-start space-x-4">
+                                    <div class="w-8 h-8 bg-brown-custom rounded-full flex items-center justify-center text-white font-bold text-sm flex-shrink-0 mt-1">
+                                        1
+                                    </div>
+                                    <div>
+                                        <h4 class="text-lg font-semibold text-gray-800 mb-2">Análisis de Viabilidad</h4>
+                                        <p class="text-gray-600">Evaluamos cuidadosamente la factibilidad técnica y económica de tu proyecto</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex items-start space-x-4">
+                                    <div class="w-8 h-8 bg-brown-custom rounded-full flex items-center justify-center text-white font-bold text-sm flex-shrink-0 mt-1">
+                                        2
+                                    </div>
+                                    <div>
+                                        <h4 class="text-lg font-semibold text-gray-800 mb-2">Planificación Estratégica</h4>
+                                        <p class="text-gray-600">Desarrollamos un plan detallado y realista con cronogramas y presupuestos ajustados</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="space-y-6">
+                                <div class="flex items-start space-x-4">
+                                    <div class="w-8 h-8 bg-brown-custom rounded-full flex items-center justify-center text-white font-bold text-sm flex-shrink-0 mt-1">
+                                        3
+                                    </div>
+                                    <div>
+                                        <h4 class="text-lg font-semibold text-gray-800 mb-2">Gestión de Permisos</h4>
+                                        <p class="text-gray-600">Te ayudamos con todos los trámites legales y permisos necesarios</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex items-start space-x-4">
+                                    <div class="w-8 h-8 bg-brown-custom rounded-full flex items-center justify-center text-white font-bold text-sm flex-shrink-0 mt-1">
+                                        4
+                                    </div>
+                                    <div>
+                                        <h4 class="text-lg font-semibold text-gray-800 mb-2">Supervisión de Obra</h4>
+                                        <p class="text-gray-600">Seguimiento cercano y control de calidad durante todo el proyecto</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+           
+        </section>
 @endsection

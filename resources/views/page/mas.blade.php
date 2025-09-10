@@ -120,6 +120,7 @@
     </div>
 
     <!-- Columna Derecha: Agente -->
+  
     <aside class="lg:col-span-4 space-y-6">
       <section class="bg-white rounded-2xl shadow-soft ring-1 ring-neutral-200/70 p-6">
         <div class="flex items-start gap-4">
@@ -142,18 +143,19 @@
         </div>
         <div class="mt-4 grid grid-cols-3 gap-2">
           <button class="rounded-xl bg-accent text-white py-2.5 font-medium hover:opacity-95 transition" onclick="openContact()">Contactar</button>
-          <a  target="_blank" href="https://wa.me/503{{ $propiedad->user->phone }}?text={{ urlencode('Hola, estoy interesado en la propiedad ' . $propiedad->titulo) }}" class="rounded-xl bg-neutral-900 text-white py-2.5 font-medium text-center hover:bg-neutral-800 transition">WhatsApp</a>
-          <a href="mailto:jimmy@example.com" class="rounded-xl bg-white text-neutral-900 ring-1 ring-neutral-200 py-2.5 font-medium text-center hover:bg-neutral-50 transition">Email</a>
+          <a  target="_blank" href="https://wa.me/503{{ $propiedad->user->phone }}?text={{ urlencode('Hola, estoy interesado en la propiedad ' . $propiedad->titulo) }}" class="rounded-xl bg-[#88e788] text-white py-2.5 font-medium text-center hover:bg-neutral-800 transition">WhatsApp</a>
+          <a href="{{route('page.agente.show',$propiedad->user->id)}}" class="rounded-xl bg-white text-neutral-900 ring-1 ring-neutral-200 py-2.5 font-medium text-center hover: bg-slate-800 transition">Ver agente</a>
         </div>
-        <div class="mt-4 grid grid-cols-3 gap-3 text-center">
+        <div class="mt-4 grid grid-cols-2 gap-3 text-center">
           <div class="rounded-xl ring-1 ring-neutral-200 p-3">
-            <div class="text-xl font-semibold">4.9</div>
+           <div class="text-xl font-semibold flex items-center gap-2">
+              {{ $propiedad->user->agente->rating }}
+              <i class="fas fa-star text-yellow-400"></i>
+          </div>
+
             <div class="text-xs text-neutral-500">Rating</div>
           </div>
-          <div class="rounded-xl ring-1 ring-neutral-200 p-3">
-            <div class="text-xl font-semibold">120+</div>
-            <div class="text-xs text-neutral-500">Ventas</div>
-          </div>
+          
           <div class="rounded-xl ring-1 ring-neutral-200 p-3">
             <div class="text-xl font-semibold">{{ $propiedad->user->agente->experiencia }} años</div>
             <div class="text-xs text-neutral-500">Experiencia</div>

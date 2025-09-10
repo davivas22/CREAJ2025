@@ -5,7 +5,7 @@
   <div class="flex-grow overflow-hidden h-full flex flex-col">
 
     <!-- Header -->
-    <div class="h-16 w-full border-b border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-800 hidden lg:flex px-10 shadow-sm"></div>
+   
 
     <div class="flex-grow flex overflow-x-hidden">
 
@@ -76,15 +76,8 @@
       </div>
 
       <!-- Lista de agentes (DERECHA) -->
-      <div class="xl:w-72 w-64 flex-shrink-0 border-l border-gray-400 dark:border-gray-800 h-full overflow-y-auto p-5 bg-neutral-50 dark:bg-gray-900 shadow-sm">
-        <div class="mb-4">
-          <input
-            type="text"
-            placeholder="Buscar agente..."
-            id="buscador-agentes"
-            class="w-full px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-800 dark:bg-gray-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-neutral-400"
-          />
-        </div>
+      <div class="xl:w-72 w-64 flex-shrink-0 border-l border-gray-400 dark:border-gray-800 h-full overflow-y-auto p-5 bg-[#09121b] dark:bg-gray-900 shadow-sm ">
+       
 
         <div class="text-xs text-neutral-500 tracking-wider mb-2">AGENTES</div>
         <div id="lista-agentes">
@@ -118,7 +111,7 @@
           >
             <img src="{{ asset($agente->foto_perfil) }}" class="w-9 h-9 rounded-full object-cover">
             <div class="flex flex-col text-left">
-              <span class="text-sm font-medium truncate">{{ $agente->name }}</span>
+              <span class="text-sm font-medium truncate text-white">{{ $agente->name }}</span>
               <span class="text-xs text-neutral-500">{{ $agente->zona }}</span>
             </div>
           </button>

@@ -1,126 +1,166 @@
 @extends('layout.app')
 
 @section('content')
-<!-- Sección de Contacto Mejorada con Estilo Impactante y Fondo Blanco -->
-<section class="py-16 bg-white text-gray-900" id="contacto">
+<section class="py-16 md:py-20 min-h-screen bg-white text-gray-900">
   <div class="max-w-7xl mx-auto px-6">
-    <!-- Título -->
-    <h2 class="text-5xl font-extrabold text-center text-[#BA9D79] mb-12 animate-fade-in">Contáctanos</h2>
-
-    <div class="grid md:grid-cols-2 gap-16">
-      <!-- Formulario de Contacto -->
-      <div>
-        <h3 class="text-3xl font-semibold text-[#BA9D79] mb-6">¡Estamos para ayudarte!</h3>
-        <p class="text-lg mb-6">¿Tienes alguna duda? ¿Estás listo para encontrar tu propiedad ideal? Completa el formulario y nos pondremos en contacto contigo en la brevedad.</p>
-        <form action="#" method="POST" class="space-y-6">
-          <div>
-            <label for="name" class="block text-lg font-medium">Nombre</label>
-            <input type="text" id="name" name="name" required class="w-full py-4 px-6 rounded-lg border border-[#BA9D79] shadow-sm focus:outline-none focus:ring-2 focus:ring-[#BA9D79] bg-gray-100 text-gray-900 placeholder-gray-400" placeholder="Tu nombre">
+    <!-- Row: 3 tarjetas de info -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <!-- Dirección -->
+      <div class="w-full text-center">
+        <div class="bg-[#071c34] rounded-2xl px-6 py-8">
+          <div class="mb-4 flex justify-center">
+            <!-- map icon -->
+            <svg class="h-12 w-12 text-[#fda40b]" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M12 2a7 7 0 00-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 00-7-7zm0 9.5a2.5 2.5 0 110-5 2.5 2.5 0 010 5z"/>
+            </svg>
           </div>
           <div>
-            <label for="email" class="block text-lg font-medium">Correo electrónico</label>
-            <input type="email" id="email" name="email" required class="w-full py-4 px-6 rounded-lg border border-[#BA9D79] shadow-sm focus:outline-none focus:ring-2 focus:ring-[#BA9D79] bg-gray-100 text-gray-900 placeholder-gray-400" placeholder="Tu correo electrónico">
+            <h2 class="text-white text-xl font-semibold capitalize mb-2">Direccion</h2>
+            <span class="block text-gray-400 text-base">Colonia Escalon </span>
+            <span class="block text-gray-400 text-base">Santa Tecla</span>
           </div>
-          <div>
-            <label for="message" class="block text-lg font-medium">Mensaje</label>
-            <textarea id="message" name="message" rows="5" required class="w-full py-4 px-6 rounded-lg border border-[#BA9D79] shadow-sm focus:outline-none focus:ring-2 focus:ring-[#BA9D79] bg-gray-100 text-gray-900 placeholder-gray-400" placeholder="Escribe tu mensaje..."></textarea>
-          </div>
-          <button type="submit" class="w-full bg-[#BA9D79] hover:bg-[#a38564] text-white font-bold py-4 px-6 rounded-full transition duration-300 transform hover:scale-105 shadow-lg">Enviar mensaje</button>
-        </form>
+        </div>
       </div>
 
-      <!-- Información de Contacto -->
-      <div>
-        <h3 class="text-3xl font-semibold text-[#BA9D79] mb-6">Conoce a Nuestros Agentes</h3>
-        <p class="text-lg mb-6">Nuestros expertos en bienes raíces están listos para ofrecerte la mejor asesoría. Aquí puedes encontrar sus detalles de contacto para cualquier consulta.</p>
-        
-        <div class="space-y-8">
-          <!-- Agente Jimmy Peña -->
-          <div class="bg-gray-100 p-6 rounded-xl shadow-lg hover:shadow-2xl transform hover:scale-105 transition duration-300">
-            <h4 class="text-2xl font-semibold text-[#BA9D79] mb-2">Jimmy Peña</h4>
-            <p class="text-lg text-gray-600 mb-4">Especialista en Bienes Raíces con más de 5 años de experiencia en el sector. Te ayudará a encontrar la propiedad perfecta.</p>
-            <ul class="space-y-3 text-lg">
-              <li class="flex items-center">
-                <i class="fas fa-phone-alt text-[#BA9D79] text-xl mr-3"></i>
-                <span>+503 9876 5432</span>
-              </li>
-              <li class="flex items-center">
-                <i class="fas fa-envelope text-[#BA9D79] text-xl mr-3"></i>
-                <span>jimmy@encasa.com</span>
-              </li>
-              <li class="flex items-center">
-                <i class="fas fa-map-marker-alt text-[#BA9D79] text-xl mr-3"></i>
-                <span>San Salvador, El Salvador</span>
-              </li>
-            </ul>
+      <!-- Email -->
+      <div class="w-full text-center">
+        <div class="bg-[#071c34] rounded-2xl px-6 py-8">
+          <div class="mb-4 flex justify-center">
+            <!-- envelope icon -->
+            <svg class="h-12 w-12 text-[#fda40b]" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M20 4H4a2 2 0 00-2 2v1.2l10 5.8 10-5.8V6a2 2 0 00-2-2z"/>
+              <path d="M22 8.3l-10 5.8L2 8.3V18a2 2 0 002 2h16a2 2 0 002-2z"/>
+            </svg>
           </div>
-
-          <!-- Agente Steven Quevedo -->
-          <div class="bg-gray-100 p-6 rounded-xl shadow-lg hover:shadow-2xl transform hover:scale-105 transition duration-300">
-            <h4 class="text-2xl font-semibold text-[#BA9D79] mb-2">Steven Quevedo</h4>
-            <p class="text-lg text-gray-600 mb-4">Con años de experiencia en el mercado inmobiliario, Steven es tu mejor opción para asesorarte en la compra o venta de propiedades.</p>
-            <ul class="space-y-3 text-lg">
-              <li class="flex items-center">
-                <i class="fas fa-phone-alt text-[#BA9D79] text-xl mr-3"></i>
-                <span>+503 1234 5678</span>
-              </li>
-              <li class="flex items-center">
-                <i class="fas fa-envelope text-[#BA9D79] text-xl mr-3"></i>
-                <span>steven@encasa.com</span>
-              </li>
-              <li class="flex items-center">
-                <i class="fas fa-map-marker-alt text-[#BA9D79] text-xl mr-3"></i>
-                <span>San Salvador, El Salvador</span>
-              </li>
-            </ul>
+          <div>
+            <h2 class="text-white text-xl font-semibold capitalize mb-2">E-mail</h2>
+            <span class="block text-gray-400 text-base">encasa@gmail.com</span>
+            <span class="block text-gray-400 text-base">yourmail@gmail.com</span>
           </div>
+        </div>
+      </div>
 
-          <!-- Agente Samuel Menjivar -->
-          <div class="bg-gray-100 p-6 rounded-xl shadow-lg hover:shadow-2xl transform hover:scale-105 transition duration-300">
-            <h4 class="text-2xl font-semibold text-[#BA9D79] mb-2">Samuel Menjivar</h4>
-            <p class="text-lg text-gray-600 mb-4">Samuel es conocido por su atención al detalle y su enfoque personalizado para cada cliente. Con él, encontrarás la propiedad de tus sueños.</p>
-            <ul class="space-y-3 text-lg">
-              <li class="flex items-center">
-                <i class="fas fa-phone-alt text-[#BA9D79] text-xl mr-3"></i>
-                <span>+503 2345 6789</span>
-              </li>
-              <li class="flex items-center">
-                <i class="fas fa-envelope text-[#BA9D79] text-xl mr-3"></i>
-                <span>samuel@encasa.com</span>
-              </li>
-              <li class="flex items-center">
-                <i class="fas fa-map-marker-alt text-[#BA9D79] text-xl mr-3"></i>
-                <span>San Salvador, El Salvador</span>
-              </li>
-            </ul>
+      <!-- Horario -->
+      <div class="w-full text-center">
+        <div class="bg-[#071c34] rounded-2xl px-6 py-8">
+          <div class="mb-4 flex justify-center">
+            <!-- clock icon -->
+            <svg class="h-12 w-12 text-[#fda40b]" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M12 2a10 10 0 1010 10A10.011 10.011 0 0012 2zm1 10.59l3.3 1.9a1 1 0 01-1 1.73l-3.8-2.2A1 1 0 0111 13V7a1 1 0 012 0z"/>
+            </svg>
+          </div>
+          <div>
+            <h2 class="text-white text-xl font-semibold capitalize mb-2">Horario de atencion</h2>
+            <span class="block text-gray-400 text-base">Lunes - Jueves  9:00 am - 4.00 pm</span>
+            <span class="block text-gray-400 text-base">Jueves - Lunes  10.00 pm - 5.00 pm</span>
           </div>
         </div>
       </div>
     </div>
+@if (session('success'))
+    <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4">
+        {{ session('success') }}
+    </div>
+@endif
+    <!-- Row: formulario + mapa -->
+    <div class="mt-10 grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <!-- Formulario (col-span 2) -->
+      <div class="lg:col-span-2">
+        <div class="inline-block w-full mt-6">
+          <div class="px-4 md:px-6 pt-5 md:pt-6">
+            <h2 class="text-2xl font-bold text-[#071c34] capitalize">Contactanos</h2>
+          </div>
 
-    <!-- Sección de Ubicación y Mapa -->
-    <div class="mt-16 grid md:grid-cols-2 gap-16">
-      <!-- Mapa de Ubicación -->
-      <div class="relative w-full h-80 rounded-xl overflow-hidden shadow-lg">
-        <iframe class="absolute inset-0 w-full h-full" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3153.5762998778655!2d-89.21547208469055!3d13.990211522489992!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8f63c22b80b507b1%3A0x1a62dbeb9ad0dbb7!2sCalle%20Principal%20%23123%2C%20San%20Salvador!5e0!3m2!1ses!2ssv!4v1651556091123!5m2!1ses!2ssv" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+          <form action="{{route('contacto.store')}}" method="post" class="p-4 md:p-6">
+
+          @csrf
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+           <!-- Name -->
+<div>
+  <input
+    type="text" name="name" placeholder="Tu nombre"
+    class="w-full rounded-md bg-[#f9f9f9] border border-[#f9f9f9] px-4 py-3 text-sm md:text-base placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#fda40b] focus:border-[#fda40b]"
+    value="{{ old('name') }}"
+  />
+  @error('name')
+    <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+  @enderror
+</div>
+
+<!-- Email -->
+<div>
+  <input
+    type="email" name="email" placeholder="Correo" required
+    class="w-full rounded-md bg-[#f9f9f9] border border-[#f9f9f9] px-4 py-3 text-sm md:text-base placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#fda40b] focus:border-[#fda40b]"
+    value="{{ old('email') }}"
+  />
+  @error('email')
+    <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+  @enderror
+</div>
+
+<!-- Phone -->
+<div>
+  <input
+    type="text" name="phone" placeholder="Número de teléfono"
+    class="w-full rounded-md bg-[#f9f9f9] border border-[#f9f9f9] px-4 py-3 text-sm md:text-base placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#fda40b] focus:border-[#fda40b]"
+    value="{{ old('phone') }}"
+  />
+  @error('phone')
+    <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+  @enderror
+</div>
+
+<!-- Subject -->
+<div>
+  <input
+    type="text" name="subject" placeholder="Asunto"
+    class="w-full rounded-md bg-[#f9f9f9] border border-[#f9f9f9] px-4 py-3 text-sm md:text-base placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#fda40b] focus:border-[#fda40b]"
+    value="{{ old('subject') }}"
+  />
+  @error('subject')
+    <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+  @enderror
+</div>
+
+<!-- Message -->
+<div class="md:col-span-2">
+  <textarea
+    name="message" placeholder="Escribe tu mensaje"
+    class="w-full h-32 md:h-40 rounded-md bg-[#f9f9f9] border border-[#f9f9f9] px-4 py-3 text-sm md:text-base placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#fda40b] focus:border-[#fda40b] resize-y"
+  >{{ old('message') }}</textarea>
+  @error('message')
+    <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+  @enderror
+</div>
+
+
+            <!-- Botón -->
+            <div class="mt-4">
+              <input
+                type="submit" value="Enviar"
+                class="inline-block w-40 bg-[#BA9D79] text-white font-semibold rounded-md py-2.5 text-base cursor-pointer transition hover:bg-[#071c34] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#fda40b]"
+              />
+            </div>
+          </form>
+        </div>
       </div>
-      
-      <!-- Información Adicional -->
-      <div>
-        <h3 class="text-2xl font-semibold text-[#BA9D79] mb-6">Visítanos</h3>
-        <p class="text-lg text-gray-600 mb-4">Estamos ubicados en el corazón de San Salvador, en una ubicación estratégica para brindarte la mejor atención. Ven a visitarnos en cualquier momento dentro de nuestro horario de atención:</p>
-        <ul class="space-y-4 text-lg">
-          <li class="flex items-center">
-            <i class="fas fa-clock text-[#BA9D79] text-xl mr-3"></i>
-            <span>Lunes - Viernes: 9:00 AM - 6:00 PM</span>
-          </li>
-          <li class="flex items-center">
-            <i class="fas fa-calendar-day text-[#BA9D79] text-xl mr-3"></i>
-            <span>Sábado: 9:00 AM - 1:00 PM</span>
-          </li>
-        </ul>
+
+      <!-- Mapa (col 1) -->
+      <div class="mt-6 lg:mt-9">
+        <div class="rounded-xl overflow-hidden shadow-sm border border-gray-200">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3877.663282782491!2d-89.18718!3d13.69294!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8f6330b9bf1e5c21%3A0x1c9c1f77f8f2ff57!2sSan%20Salvador%2C%20El%20Salvador!5e0!3m2!1ses!2ssv!4v1693584680000!5m2!1ses!2ssv"
+            width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            class="w-full h-[450px]"
+          ></iframe>
+
+        </div>
       </div>
     </div>
   </div>
 </section>
+
+
 @endsection

@@ -12,6 +12,7 @@ class PropiedadesController extends Controller
         $tipo = $request->input('tipo');
         $precio = $request->input('precio');
         $habitaciones = $request->input('habitaciones');
+     
 
         $query =  Propertie::with('imagenes');
 
@@ -39,6 +40,7 @@ class PropiedadesController extends Controller
         if($habitaciones){
             $query->where('habitaciones', $habitaciones);
         }
+      
 
         $propiedades=$query->get();
 

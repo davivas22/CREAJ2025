@@ -20,11 +20,10 @@ return new class extends Migration
     /**
      * Reverse the migrations.
      */
-    public function down(): void
-    {
-        Schema::table('properties', function (Blueprint $table) {
-            $table->decimal('lat',10,8)->nullable();
-            $table->decimal('lng',11,8)->nullable();
-        });
-    }
+public function down(): void
+{
+    Schema::table('properties', function (Blueprint $table) {
+        $table->dropColumn(['lat', 'lng']);
+    });
+}
 };
