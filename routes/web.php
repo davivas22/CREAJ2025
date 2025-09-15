@@ -53,6 +53,7 @@ Route::get('/favoritos', [FavoritoController::class, 'index'])->name('favoritos.
 Route::post('/favoritos/{propiedad}/toggle', [FavoritoController::class, 'toggle'])->name('favoritos.toggle');
 Route::get('/comparar',[CompararController::class,'index'])->name('page.comparar.propiedades');
 Route::post('/comparar-ia',[CompararController::class,'compararconIA'])->name('comparar.ia');
+Route::post('/enriquecerPropiedades',[CompararController::class,'enriquecerPropiedades'])->name('propiedades.enriquecer');
 
 
 //  Admin

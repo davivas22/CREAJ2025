@@ -1,110 +1,84 @@
 @extends('layout.app')
 
 @section('content')
-<div class="max-w-6xl mx-auto p-8">
-    <!-- Botón volver -->
-    <div class="mb-6 left-2">
-        <a href="{{ route('favoritos.index') }}" 
-           class="inline-flex items-center gap-2 text-[#09121b] hover:text-[#BA9D79] font-medium transition">
-            <svg xmlns="http://www.w3.org/2000/svg" 
-                 class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
-                      d="M15 19l-7-7 7-7" />
-            </svg>
-            Volver a Favoritos
-        </a>
-    </div>
+<div class="max-w-7xl mx-auto p-8 grid grid-cols-1 lg:grid-cols-3 gap-8">
 
+  <!-- 📌 Columna izquierda (Propiedades + mapa) -->
+  <div class="lg:col-span-2 space-y-10">
     <!-- Título -->
-    <h1 class="text-3xl font-bold text-center mb-10 text-[#09121b]">
-        Comparar Propiedades 
+    <h1 class="text-3xl font-bold text-center text-[#09121b]">
+      Comparar Propiedades 
     </h1>
 
-    <!-- Contenedor comparativo -->
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-        @foreach($propiedades as $propiedad)
-            <div class="bg-[#09121b] text-white rounded-2xl shadow-lg p-6 flex flex-col items-center border border-[#BA9D79]/30">
-                <!-- Imagen -->
-                <div class="w-full relative">
-                    <img src="{{ asset($propiedad->imagenes->first()->ruta ?? 'images/default.jpg') }}"
-                         alt="Imagen {{ $propiedad->titulo }}"
-                         class="w-full h-48 object-cover rounded-lg mb-4 shadow-md">
-                    <span class="absolute top-3 left-3 bg-[#44359c] text-white text-xs font-semibold px-3 py-1 rounded">
-                        {{ $propiedad->tipo }}
-                    </span>
-                </div>
+    <!-- Cards de propiedades -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      @foreach($propiedades as $propiedad)
+        <div class="bg-[#09121b] text-white rounded-2xl shadow-lg p-6 border border-[#BA9D79]/30">
+          <img src="{{ asset($propiedad->imagenes->first()->ruta ?? 'images/default.jpg') }}"
+               alt="Imagen {{ $propiedad->titulo }}"
+               class="w-full h-48 object-cover rounded-lg mb-4 shadow-md">
 
-                <!-- Título y ubicación -->
-                <h2 class="text-xl font-bold text-white mb-1 text-center">
-                    {{ $propiedad->titulo }}
-                </h2>
-                <p class="text-sm text-gray-300 mb-6 flex items-center gap-1">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-[#BA9D79]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
-                              d="M12 11c1.657 0 3-1.343 3-3S13.657 5 12 5s-3 1.343-3 3 1.343 3 3 3z" />
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
-                              d="M12 22s8-4.5 8-11.5S16.418 2 12 2 4 6.5 4 10.5 12 22 12 22z" />
-                    </svg>
-                    {{ $propiedad->ubicacion }}
-                </p>
+          <h2 class="text-lg font-bold mb-1">{{ $propiedad->titulo }}</h2>
+          <p class="text-sm text-gray-300 mb-4">{{ $propiedad->ubicacion }}</p>
 
-                <!-- Características -->
-                <ul class="w-full space-y-3 text-sm">
-                    <li class="flex justify-between px-4 py-2 bg-white/10 rounded-lg">
-                        <span class="flex items-center gap-2 font-semibold">💲 Precio</span>
-                        <span class="text-[#79ba82] font-bold">${{ number_format($propiedad->precio, 2) }}</span>
-                    </li>
-                    <li class="flex justify-between px-4 py-2 bg-white/10 rounded-lg">
-                        <span class="flex items-center gap-2 font-semibold">🛏 Habitaciones</span>
-                        <span>{{ $propiedad->habitaciones }}</span>
-                    </li>
-                    <li class="flex justify-between px-4 py-2 bg-white/10 rounded-lg">
-                        <span class="flex items-center gap-2 font-semibold">🛁 Baños</span>
-                        <span>{{ $propiedad->banos }}</span>
-                    </li>
-                    <li class="flex justify-between px-4 py-2 bg-white/10 rounded-lg">
-                        <span class="flex items-center gap-2 font-semibold">🚗 Parqueos</span>
-                        <span>{{ $propiedad->parqueos }}</span>
-                    </li>
-                    <li class="flex justify-between px-4 py-2 bg-white/10 rounded-lg">
-                        <span class="flex items-center gap-2 font-semibold">📐 Área terreno</span>
-                        <span>{{ $propiedad->area_terreno }} m²</span>
-                    </li>
-                </ul>
-            </div>
-        @endforeach
+          <ul class="space-y-2 text-sm">
+            <li class="flex justify-between bg-white/10 px-3 py-1 rounded">
+              💲 <span class="text-[#79ba82] font-bold">${{ number_format($propiedad->precio, 2) }}</span>
+            </li>
+            <li class="flex justify-between bg-white/10 px-3 py-1 rounded">
+              🛏 {{ $propiedad->habitaciones }}
+            </li>
+            <li class="flex justify-between bg-white/10 px-3 py-1 rounded">
+              🛁 {{ $propiedad->banos }}
+            </li>
+            <li class="flex justify-between bg-white/10 px-3 py-1 rounded">
+              🚗 {{ $propiedad->parqueos }}
+            </li>
+            <li class="flex justify-between bg-white/10 px-3 py-1 rounded">
+              📐 {{ $propiedad->area_terreno }} m²
+            </li>
+          </ul>
+        </div>
+      @endforeach
     </div>
 
     <!-- Mapa -->
-    <div class="mt-10">
-        <h2 class="text-2xl font-bold text-center text-[#09121b] mb-6">
-            Ubicaciones en el mapa
-        </h2>
-        <div id="map" class="w-full h-96 rounded-lg shadow-md"></div>
+    <div>
+      <h2 class="text-2xl font-bold text-center text-[#09121b] mb-4">
+        Ubicaciones en el mapa
+      </h2>
+      <div id="map" class="w-full h-80 rounded-lg shadow-md"></div>
     </div>
+  </div>
 
-    <!-- Botón y resultado -->
-    <div class="mt-12 text-center">
-        <button onclick="compararIA()" 
-                class="px-6 py-3 bg-[#09121b] hover:bg-[#BA9D79] text-white font-bold rounded-lg shadow-md transition">
-            ⚖️ Comparar con IA
-        </button>
-    </div>
+ 
+<div class="bg-white border border-[#BA9D79] rounded-2xl shadow-lg flex flex-col h-[80vh]">
+  <div class="p-6 border-b border-[#BA9D79]/30">
+    <h3 class="text-xl font-bold text-[#09121b]"> Necesitas ayuda?</h3>
+  </div>
 
-    <div id="resultadoBox" class="mt-8 hidden">
-        <div class="bg-white border border-[#BA9D79]/50 rounded-2xl shadow-lg p-6">
-            <h3 class="text-xl font-bold text-[#09121b] mb-4">🧠 Conclusión de la IA</h3>
-            <div id="resultadoComparacion" class="text-gray-700 leading-relaxed"></div>
-        </div>
-    </div>
+  <!-- Contenedor estilo chat con scroll -->
+  <div id="resultadoBox" class="flex-1 overflow-y-auto p-6 hidden">
+    <p id="resultadoComparacion" class="text-gray-700 leading-relaxed">
+      Generando conclusión...
+    </p>
+  </div>
+
+  <!-- Botón fijo abajo -->
+  <div class="p-4 border-t border-[#BA9D79]/30">
+    <button onclick="compararIA()" 
+            class="w-full px-4 py-2 bg-[#09121b] hover:bg-[#BA9D79] text-white font-semibold rounded-lg shadow-md transition">
+       Empezar comparación
+    </button>
+  </div>
 </div>
-
 
 
 <script>
 const propiedades = @json($propiedades);
 let propiedadesEnriquecidas = [];
 
+// 🚀 Inicializa el mapa y muestra marcadores
 async function initMap() {
     const map = new google.maps.Map(document.getElementById("map"), {
         zoom: 12,
@@ -112,14 +86,11 @@ async function initMap() {
     });
 
     const bounds = new google.maps.LatLngBounds();
-    const serviceDistance = new google.maps.DistanceMatrixService();
-    const geocoder = new google.maps.Geocoder();
 
     for (const prop of propiedades) {
         if (prop.lat && prop.lng) {
             const position = { lat: parseFloat(prop.lat), lng: parseFloat(prop.lng) };
 
-            // ✅ Marcador de la propiedad
             const marker = new google.maps.Marker({
                 position,
                 map,
@@ -138,117 +109,37 @@ async function initMap() {
 
             marker.addListener("click", () => info.open(map, marker));
             bounds.extend(position);
-
-            // 👉 Buscar centro comercial cercano
-            let centroComercial = "Ninguno cercano";
-            let centroCoords = null;
-            try {
-                const { places: malls } = await google.maps.places.Place.searchNearby({
-                    locationRestriction: {
-                        center: position,
-                        radius: 5000
-                    },
-                    includedTypes: ["shopping_mall"],
-                    fields: ["displayName", "location"]
-                });
-                if (malls && malls.length > 0) {
-                    centroComercial = malls[0].displayName?.text || malls[0].name;
-                    centroCoords = {
-                        lat: parseFloat(malls[0].location.latitude), // 👈 conversión correcta
-                        lng: parseFloat(malls[0].location.longitude)
-                    };
-                }
-            } catch (err) {
-                console.error("Error buscando centro comercial:", err);
-            }
-
-            // 👉 Buscar hospital cercano
-            let hospital = "Ninguno cercano";
-            try {
-                const { places: hospitals } = await google.maps.places.Place.searchNearby({
-                    locationRestriction: {
-                        center: position,
-                        radius: 5000
-                    },
-                    includedTypes: ["hospital"],
-                    fields: ["displayName", "location"]
-                });
-                if (hospitals && hospitals.length > 0) {
-                    hospital = hospitals[0].displayName?.text || hospitals[0].name;
-                }
-            } catch (err) {
-                console.error("Error buscando hospital:", err);
-            }
-
-            // 👉 Calle/carretera cercana con Geocoding
-            let calle = "No disponible";
-            try {
-                const geoResults = await new Promise((resolve, reject) => {
-                    geocoder.geocode({ location: position }, (results, status) => {
-                        if (status === "OK" && results[0]) {
-                            resolve(results);
-                        } else {
-                            reject(status);
-                        }
-                    });
-                });
-                calle = geoResults[0].formatted_address;
-            } catch (err) {
-                console.warn("No se pudo obtener calle:", err);
-            }
-
-            // 👉 Distancia conduciendo al centro comercial
-            let distancia = "No calculada";
-            let tiempo = "No calculado";
-            if (centroCoords) {
-                await new Promise((resolve) => {
-                    serviceDistance.getDistanceMatrix({
-                        origins: [position],
-                        destinations: [centroCoords], // ✅ ahora LatLngLiteral válido
-                        travelMode: "DRIVING",
-                        drivingOptions: {
-                            departureTime: new Date(),
-                            trafficModel: "bestguess"
-                        }
-                    }, (response, status3) => {
-                        if (status3 === "OK") {
-                            distancia = response.rows[0].elements[0].distance.text;
-                            tiempo = response.rows[0].elements[0].duration_in_traffic.text;
-                        }
-                        resolve();
-                    });
-                });
-            }
-
-            // 👉 Guardamos la propiedad enriquecida
-            propiedadesEnriquecidas.push({
-                id: prop.id,
-                titulo: prop.titulo,
-                ubicacion: prop.ubicacion,
-                precio: prop.precio,
-                habitaciones: prop.habitaciones,
-                area_terreno: prop.area_terreno,
-                estado: prop.estado,
-                centro_comercial: centroComercial,
-                hospital: hospital,
-                calle: calle,
-                distancia_centrocomercial: distancia,
-                tiempo_centrocomercial: tiempo
-            });
-
-            console.log("✔ Procesada:", prop.titulo, propiedadesEnriquecidas);
         }
     }
 
     if (!bounds.isEmpty()) {
         map.fitBounds(bounds);
     }
+
+    await enriquecerPropiedades();
 }
 
-// 👉 Función para enviar al backend
-function compararIA() {
-    console.log("Propiedades enriquecidas:", propiedadesEnriquecidas);
+// 🔥 Pide al backend las propiedades enriquecidas
+async function enriquecerPropiedades() {
+    try {
+        const response = await fetch("{{ route('propiedades.enriquecer') }}", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').content
+            },
+            body: JSON.stringify({ propiedades })
+        });
 
+        propiedadesEnriquecidas = await response.json();
+        console.log("✔ Propiedades enriquecidas:", propiedadesEnriquecidas);
+    } catch (err) {
+        console.error("⚠️ Error al enriquecer propiedades:", err);
+    }
+}
+
+// ⚖️ Envía a la IA para la comparación
+function compararIA() {
     if (propiedadesEnriquecidas.length === 0) {
         alert("⏳ Espera unos segundos, aún se están cargando los datos.");
         return;
@@ -263,9 +154,7 @@ function compararIA() {
             "Content-Type": "application/json",
             "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').content
         },
-        body: JSON.stringify({
-            propiedades: propiedadesEnriquecidas
-        })
+        body: JSON.stringify({ propiedades: propiedadesEnriquecidas })
     })
     .then(res => res.json())
     .then(data => {
@@ -277,16 +166,15 @@ function compararIA() {
     });
 }
 
-window.onload = function() {
-    initMap();
-};
+window.onload = initMap;
 </script>
 
 
 
 
-<!-- OJO: usa la nueva versión de Places API -->
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBClZqEH1UjCXzitW8-3Yuz5Kz7CgjmPO4&libraries=places&v=weekly&callback=initMap" async defer></script>
+<!-- ✅ Solo Google Maps básico para mostrar el mapa -->
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBClZqEH1UjCXzitW8-3Yuz5Kz7CgjmPO4&callback=initMap" async defer></script>
+
 
 
 

@@ -26,6 +26,85 @@ class CompararController extends Controller
         return view('page.comparar', compact('propiedades'));
     }
 
+     public function enriquecerPropiedades(Request $request)
+    {
+        $propiedades = $request->input('propiedades');
+        $apiKey = env('GOOGLE_API_KEY');
+
+        $propiedadesEnriquecidas = [];
+
+        foreach ($propiedades as $prop) {
+            $lat = $prop['lat'] ?? null;
+            $lng = $prop['lng'] ?? null;
+
+            $centroComercial = "No disponible";
+            $hospital = "No disponible";
+
+            if ($lat && $lng) {
+                try {
+                    // 🔍 Centro Comercial
+                    $mallResponse = Http::withHeaders([
+                        'Content-Type' => 'application/json',
+                        'X-Goog-Api-Key' => $apiKey,
+                        'X-Goog-FieldMask' => 'places.displayName,places.location',
+                    ])->post("https://places.googleapis.com/v1/places:searchNearby", [
+                        "includedTypes" => ["shopping_mall"],
+                        "maxResultCount" => 1,
+                        "locationRestriction" => [
+                            "circle" => [
+                                "center" => [
+                                    "latitude" => (float) $lat,
+                                    "longitude" => (float) $lng,
+                                ],
+                                "radius" => 5000
+                            ]
+                        ]
+                    ]);
+
+                    $mallData = $mallResponse->json();
+                    if (!empty($mallData['places'][0]['displayName']['text'])) {
+                        $centroComercial = $mallData['places'][0]['displayName']['text'];
+                    }
+
+                    // 🏥 Hospital
+                    $hospitalResponse = Http::withHeaders([
+                        'Content-Type' => 'application/json',
+                        'X-Goog-Api-Key' => $apiKey,
+                        'X-Goog-FieldMask' => 'places.displayName,places.location',
+                    ])->post("https://places.googleapis.com/v1/places:searchNearby", [
+                        "includedTypes" => ["hospital"],
+                        "maxResultCount" => 1,
+                        "locationRestriction" => [
+                            "circle" => [
+                                "center" => [
+                                    "latitude" => (float) $lat,
+                                    "longitude" => (float) $lng,
+                                ],
+                                "radius" => 5000
+                            ]
+                        ]
+                    ]);
+
+                    $hospitalData = $hospitalResponse->json();
+                    if (!empty($hospitalData['places'][0]['displayName']['text'])) {
+                        $hospital = $hospitalData['places'][0]['displayName']['text'];
+                    }
+
+                } catch (\Exception $e) {
+                    Log::error("Error con Google Places: " . $e->getMessage());
+                }
+            }
+
+            $propiedadesEnriquecidas[] = array_merge($prop, [
+                'centro_comercial' => $centroComercial,
+                'hospital' => $hospital,
+            ]);
+        }
+
+        return response()->json($propiedadesEnriquecidas);
+    }
+
+
  public function compararConIA(Request $request)
 {
     $propiedades = $request->input('propiedades'); 
