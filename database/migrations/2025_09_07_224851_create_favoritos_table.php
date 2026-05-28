@@ -11,13 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('favoritos', function (Blueprint $table) {
-             $table->id();
-                $table->foreignId('user_id')->constrained()->onDelete('cascade');
-                $table->foreignId('propiedad_id')->constrained('properties')->onDelete('cascade');
-                $table->timestamps();
-                $table->unique(['user_id', 'propertie_id']); // evita duplicados
-        });
+       Schema::create('favoritos', function (Blueprint $table) {
+    $table->id();
+    $table->foreignId('user_id')->constrained()->onDelete('cascade');
+    $table->foreignId('propiedad_id')->constrained('properties')->onDelete('cascade');
+    $table->timestamps();
+    $table->unique(['user_id', 'propiedad_id']); // fix: nombre correcto
+});
     }
 
     /**
