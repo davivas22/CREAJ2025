@@ -2,12 +2,13 @@
   "phases": {
     "install": {
       "cmds": [
-        "composer install --no-dev --optimize-autoloader --ignore-platform-reqs"
+        "composer install --no-dev --optimize-autoloader --ignore-platform-reqs",
+        "npm ci"
       ]
     },
     "build": {
       "cmds": [
-        "npm ci && npm run build"
+        "npm run build"
       ]
     }
   },
