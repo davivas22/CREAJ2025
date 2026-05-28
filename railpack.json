@@ -4,6 +4,11 @@
       "cmds": [
         "composer install --no-dev --optimize-autoloader --ignore-platform-reqs"
       ]
+    },
+    "build": {
+      "cmds": [
+        "npm ci && npm run build"
+      ]
     }
   },
   "start": {
